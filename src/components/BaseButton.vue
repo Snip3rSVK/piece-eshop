@@ -1,16 +1,22 @@
 <template>
-  <router-link :to="to" class="base-button">
-    <slot></slot>
+  <router-link
+    :to="to"
+    class="base-button"
+  >
+    <slot />
   </router-link>
 </template>
 
 <script>
-  export default {
-    name: 'BaseButton',
-    props: {
-      to: String
-    }      
-  }
+export default {
+  name: 'BaseButton',
+  props: {
+    to: {
+      type: String,
+      default: '/',
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

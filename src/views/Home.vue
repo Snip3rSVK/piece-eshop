@@ -3,24 +3,34 @@
     <main class="home-content-wrapper">
       <div class="home-content">
         <div class="home-text-wrapper">
-          <h2 class="home-subtitle">Čokoládovňa</h2>
-          <h1 class="home-title">Piece</h1>
+          <h2 class="home-subtitle">
+            Čokoládovňa
+          </h2>
+          <h1 class="home-title">
+            Piece
+          </h1>
         </div>
-        <base-button to="/eshop">Obchod</base-button>
+        <base-button to="/eshop">
+          Obchod
+        </base-button>
       </div>
-      <img class="home-logo" src="@/assets/img/logo.svg" alt="Logo Čokoládovňa Piece">
+      <img
+        class="home-logo"
+        src="@/assets/img/logo.svg"
+        alt="Logo Čokoládovňa Piece"
+      >
     </main>
   </div>
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton';
+import BaseButton from '@/components/BaseButton.vue';
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
-    'base-button': BaseButton
-  }
+    'base-button': BaseButton,
+  },
 };
 </script>
 
