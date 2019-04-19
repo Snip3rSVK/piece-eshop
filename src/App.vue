@@ -15,4 +15,8 @@ body {
   font-family: 'Raleway', sans-serif;
   color: $dark-brown;
 }
+
+[v-cloak] {
+  display: none !important;
+}
 </style>
