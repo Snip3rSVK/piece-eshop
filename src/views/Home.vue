@@ -6,7 +6,6 @@
     <div class="home">
       <div class="home-landscape" />
       <div class="home-portrait" />
-      <div class="home-chocolate-pieces-portrait" />
       <main class="home-content-wrapper">
         <div class="home-content">
           <div class="home-title-wrapper">
@@ -151,19 +150,6 @@ export default {
   //animation: wave 4.88889s 0.1s infinite linear;
 }
 
-/* .home-chocolate-pieces-from {
-  opacity: 0;
-}
-
-.home-chocolate-pieces-active {
-  transition: opacity 0.3s $ease-out-quint;
-  transition-delay: 1200ms;
-}
-
-.home-chocolate-pieces-to {
-  opacity: 1;
-} */
-
 .home-portrait {
   width: 100%;
   height: 50%;
@@ -172,6 +158,31 @@ export default {
   left: 0;
   display: none;
   z-index: 10;
+}
+
+.home-chocolate-pieces-portrait-wrapper {
+  position: absolute;
+  width: 104vw;
+  height: 60vh;
+  top: initial !important;
+  left: -2% !important;
+  right: -2% !important;
+  bottom: -2% !important;
+  display: none !important;
+}
+
+.home-chocolate-pieces-portrait {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  background-image: url('~@/assets/img/chocolate-pieces-portrait.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: 9;
+  //animation: wave 4.88889s 0.1s infinite linear;
 }
 
 .home-logo-wrapper {
@@ -349,6 +360,10 @@ export default {
 
   .home-chocolate-pieces-landscape-wrapper {
     display: none !important;
+  }
+
+  .home-chocolate-pieces-portrait-wrapper {
+    display: block !important;
   }
 
   .home-logo-wrapper {
