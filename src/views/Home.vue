@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <div class="home-landscape" />
+    <div class="home-portrait" />
     <main class="home-content-wrapper">
       <div class="home-content">
         <div class="home-title-wrapper">
@@ -45,11 +47,20 @@
           </base-button>
         </transition>
       </div>
-      <img
-        class="home-logo"
-        src="@/assets/img/logo.svg"
-        alt="Logo Čokoládovňa Piece"
-      >
+      <div class="home-logo-wrapper">
+        <transition
+          appear=""
+          appear-class="home-logo-from"
+          appear-active-class="home-logo-active"
+          appear-to-class="home-logo-to"
+        >
+          <img
+            class="home-logo"
+            src="@/assets/img/logo.svg"
+            alt="Logo Čokoládovňa Piece"
+          >
+        </transition>
+      </div>
     </main>
   </div>
 </template>
@@ -70,19 +81,57 @@ export default {
 @import '~@/assets/sass/mixins';
 
 .home {
-  background-image: url('~@/assets/img/melting-chocolate.svg');
-  background-repeat: no-repeat;
-  background-position: top right;
-  background-size: auto 95%;
   height: 100vh;
   overflow: hidden;
   user-select: none;
 }
 
+.home-landscape {
+  position: absolute;
+  width: 56%;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 10;
+  background-image: url('~@/assets/img/melting-chocolate.svg');
+  background-repeat: no-repeat;
+  background-position: top -5vh left;
+  background-size: cover;
+}
+
+.home-portrait {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 10;
+}
+
+.home-logo-wrapper {
+  margin-top: calc(0.5rem + 5vh);
+  align-self: flex-start;
+  margin-right: em(-6px, 16px);
+  overflow: hidden;
+  z-index: 11;
+}
+
 .home-logo {
   height: 5em;
-  margin-top: 2rem;
-  align-self: flex-start;
+}
+
+.home-logo-from {
+  transform: translateX(100%);
+}
+
+.home-logo-active {
+  transition: transform 400ms $ease-out-quint;
+  transition-delay: 400ms;
+}
+
+.home-logo-to {
+  transform: translateX(0);
 }
 
 .home-content-wrapper {
@@ -103,6 +152,7 @@ export default {
   align-items: center;
   justify-items: center;
   margin-left: em(-73px, 16px);
+  // font-size: calc(4px + 12 / 1920 * 100vw);
 }
 
 .home-title-wrapper {
@@ -202,6 +252,7 @@ export default {
   justify-self: start;
   margin-left: em(45px, 20px);
   margin-top: em(31px, 20px);
+  z-index: 11;
 }
 
 .home-base-button-from {
@@ -209,30 +260,150 @@ export default {
 }
 
 .home-base-button-active {
-  transition: opacity 1s;
+  transition: opacity 800ms $ease-out-quint;
+  transition-delay: 500ms;
 }
 
 .home-base-button-to {
   opacity: 1;
 }
 
-/* .home-button-enter {
-  opacity: 0;
+@media (max-aspect-ratio: 12/8) {
+  .home-landscape {
+    background-image: none;
+  }
+
+  .home-portrait {
+    background-image: url('~@/assets/img/melting-chocolate-horizontal-2x-length.svg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    display: block;
+  }
+
+  .home-logo-wrapper {
+    order: 1;
+    align-self: center;
+    margin-right: 0;
+    margin-top: 4vh;
+  }
+
+  .home-logo-from {
+    transform: translateY(-100%);
+  }
+
+  .home-logo-to {
+    transform: translateY(0);
+  }
+
+  .home-content-wrapper {
+    flex-direction: column;
+  }
+
+  .home-content {
+    order: 2;
+    grid-template-columns: auto;
+    grid-template-rows: auto 2.25em auto;
+    margin: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    //padding-top: 20vh;
+    //font-size: calc(4px + 12 / 1920 * 100vw);
+  }
+
+  .home-title-wrapper {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .home-title {
+    padding-left: 0;
+    padding-bottom: em(32px, 150px);
+  }
+
+  .home-title-from {
+    transform: translateY(100%);
+  }
+
+  .home-title-to {
+    transform: translateX(0%);
+  }
+
+  .home-subtitle-wrapper {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .home-subtitle {
+    transform: none;
+  }
+
+  .home-subtitle-from {
+    transform: translateY(-2.25em);
+  }
+
+  .home-subtitle-active {
+    transition: transform 350ms;
+    transition-delay: 650ms;
+  }
+
+  .home-subtitle-to {
+    transform: translateY(0);
+  }
+
+  .home-subtitle-line {
+    top: 0;
+    left: 0;
+    right: auto;
+    width: 100%;
+    height: 0.25em;
+  }
+
+  .home-subtitle-line-from {
+    width: 0;
+  }
+
+  .home-subtitle-line-active {
+    transition: 850ms width $ease-in-out-quint;
+  }
+
+  .home-subtitle-line-to {
+    width: 100%;
+  }
+
+  .base-button {
+    margin-left: 0;
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: center;
+  }
 }
 
-.home-button-enter-active {
-  transition: opacity 0.5s;
+@media (max-aspect-ratio: 10/8) {
+
 }
 
-.home-button-enter-to {
-  opacity: 1;
-} */
-/*
-.home-button-enter-active, .home-button-leave-active {
-  transition: opacity 5s;
+@media (max-height: 23.75rem) {
+  .home-logo {
+    height: 4em;
+  }
 }
 
-.home-button-enter,  .home-button-leave-to {
-  opacity: 0;
-} */
+@media (max-height: 20.625rem) {
+  .home-logo {
+    height: 3em;
+  }
+}
+
+@media (max-aspect-ratio: 12/8) and (max-height: 32.5rem) {
+  .home-logo {
+    height: 4em;
+  }
+}
+
+@media (max-aspect-ratio: 12/8) and (max-height: 28.75rem) {
+  .home-logo {
+    height: 3em;
+  }
+}
 </style>
