@@ -1,77 +1,103 @@
 <template>
-  <div class="home">
-    <div class="home-landscape" />
-    <div class="home-portrait" />
-    <main class="home-content-wrapper">
-      <div class="home-content">
-        <div class="home-title-wrapper">
+  <div
+    ref="homeChocolatePiecesLandscape"
+    class="home-scene-landscape"
+  >
+    <div class="home">
+      <div class="home-landscape" />
+      <div class="home-portrait" />
+      <div class="home-chocolate-pieces-portrait" />
+      <main class="home-content-wrapper">
+        <div class="home-content">
+          <div class="home-title-wrapper">
+            <transition
+              appear=""
+              appear-class="home-title-from"
+              appear-active-class="home-title-active"
+              appear-to-class="home-title-to"
+            >
+              <h1 class="home-title">
+                Piece
+              </h1>
+            </transition>
+          </div>
+          <div class="home-subtitle-wrapper">
+            <transition
+              appear=""
+              appear-class="home-subtitle-from"
+              appear-active-class="home-subtitle-active"
+              appear-to-class="home-subtitle-to"
+            >
+              <h2 class="home-subtitle">
+                Čokoládovňa
+              </h2>
+            </transition>
+            <transition
+              appear=""
+              appear-class="home-subtitle-line-from"
+              appear-active-class="home-subtitle-line-active"
+              appear-to-class="home-subtitle-line-to"
+            >
+              <div class="home-subtitle-line" />
+            </transition>
+          </div>
           <transition
-            appear=""
-            appear-class="home-title-from"
-            appear-active-class="home-title-active"
-            appear-to-class="home-title-to"
+            appear
+            appear-class="home-base-button-from"
+            appear-active-class="home-base-button-active"
+            appear-to-class="home-base-button-to"
           >
-            <h1 class="home-title">
-              Piece
-            </h1>
+            <base-button to="/eshop">
+              Obchod
+            </base-button>
           </transition>
         </div>
-        <div class="home-subtitle-wrapper">
+        <div class="home-logo-wrapper">
           <transition
             appear=""
-            appear-class="home-subtitle-from"
-            appear-active-class="home-subtitle-active"
-            appear-to-class="home-subtitle-to"
+            appear-class="home-logo-from"
+            appear-active-class="home-logo-active"
+            appear-to-class="home-logo-to"
           >
-            <h2 class="home-subtitle">
-              Čokoládovňa
-            </h2>
-          </transition>
-          <transition
-            appear=""
-            appear-class="home-subtitle-line-from"
-            appear-active-class="home-subtitle-line-active"
-            appear-to-class="home-subtitle-line-to"
-          >
-            <div class="home-subtitle-line" />
+            <img
+              class="home-logo"
+              src="@/assets/img/logo.svg"
+              alt="Logo Čokoládovňa Piece"
+            >
           </transition>
         </div>
-        <transition
-          appear
-          appear-class="home-base-button-from"
-          appear-active-class="home-base-button-active"
-          appear-to-class="home-base-button-to"
-        >
-          <base-button to="/eshop">
-            Obchod
-          </base-button>
-        </transition>
-      </div>
-      <div class="home-logo-wrapper">
-        <transition
-          appear=""
-          appear-class="home-logo-from"
-          appear-active-class="home-logo-active"
-          appear-to-class="home-logo-to"
-        >
-          <img
-            class="home-logo"
-            src="@/assets/img/logo.svg"
-            alt="Logo Čokoládovňa Piece"
-          >
-        </transition>
-      </div>
-    </main>
+      </main>
+    </div>
+    <div
+      data-depth="0.05"
+      class="home-chocolate-pieces-landscape-wrapper"
+    >
+      <div class="home-chocolate-pieces-landscape" />
+    </div>
+    <div
+      data-depth="0.05"
+      class="home-chocolate-pieces-portrait-wrapper"
+    >
+      <div class="home-chocolate-pieces-portrait" />
+    </div>
   </div>
 </template>
 
 <script>
 import BaseButton from '@/components/BaseButton.vue';
+import Parallax from 'parallax-js';
 
 export default {
   name: 'Home',
   components: {
     'base-button': BaseButton,
+  },
+  mounted() {
+    const scene = this.$refs.homeChocolatePiecesLandscape;
+    const parallaxInstance = new Parallax(scene, {
+      relativeInput: true,
+      hoverOnly: true,
+    });
   },
 };
 </script>
@@ -79,6 +105,11 @@ export default {
 <style scoped lang="scss">
 @import '~@/assets/sass/variables';
 @import '~@/assets/sass/mixins';
+
+.home-scene-landscape {
+  height: 100%;
+  overflow: hidden;
+}
 
 .home {
   height: 100vh;
@@ -98,6 +129,40 @@ export default {
   background-position: top -5vh left;
   background-size: cover;
 }
+
+.home-chocolate-pieces-landscape-wrapper {
+  width: 50%;
+  height: 102vh;
+  margin-left: -2%;
+  margin-top: -1vh;
+}
+
+.home-chocolate-pieces-landscape {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-image: url('~@/assets/img/chocolate-pieces.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+  z-index: 9;
+  //animation: wave 4.88889s 0.1s infinite linear;
+}
+
+/* .home-chocolate-pieces-from {
+  opacity: 0;
+}
+
+.home-chocolate-pieces-active {
+  transition: opacity 0.3s $ease-out-quint;
+  transition-delay: 1200ms;
+}
+
+.home-chocolate-pieces-to {
+  opacity: 1;
+} */
 
 .home-portrait {
   width: 100%;
@@ -152,7 +217,7 @@ export default {
   align-items: center;
   justify-items: center;
   margin-left: em(-73px, 16px);
-  // font-size: calc(4px + 12 / 1920 * 100vw);
+  font-size: calc(6px + 10 / 1920 * 100vw);
 }
 
 .home-title-wrapper {
@@ -253,6 +318,7 @@ export default {
   margin-left: em(45px, 20px);
   margin-top: em(31px, 20px);
   z-index: 11;
+  pointer-events: all;
 }
 
 .home-base-button-from {
@@ -281,6 +347,10 @@ export default {
     display: block;
   }
 
+  .home-chocolate-pieces-landscape-wrapper {
+    display: none !important;
+  }
+
   .home-logo-wrapper {
     order: 1;
     align-self: center;
@@ -305,10 +375,9 @@ export default {
     grid-template-columns: auto;
     grid-template-rows: auto 2.25em auto;
     margin: 0;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 12vh;
     //padding-top: 20vh;
-    //font-size: calc(4px + 12 / 1920 * 100vw);
+    font-size: calc(8px + 10 / 1920 * 100vmin);
   }
 
   .home-title-wrapper {
@@ -317,7 +386,8 @@ export default {
   }
 
   .home-title {
-    padding-left: 0;
+    //font-size: 8.75em;
+    padding-left: em(4px, 150px);
     padding-bottom: em(32px, 150px);
   }
 
@@ -383,6 +453,13 @@ export default {
 
 }
 
+@media (max-width: 15rem) {
+  .home-title {
+    font-size: 6em;
+    padding-bottom: em(32px, 96px);
+  }
+}
+
 @media (max-height: 23.75rem) {
   .home-logo {
     height: 4em;
@@ -404,6 +481,16 @@ export default {
 @media (max-aspect-ratio: 12/8) and (max-height: 28.75rem) {
   .home-logo {
     height: 3em;
+  }
+}
+
+@keyframes wave {
+  from {
+    transform: rotateZ(0deg) translate3d(0, 0.5%, 0) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateZ(360deg) translate3d(0, 0.5%, 0) rotateZ(-360deg);
   }
 }
 </style>
