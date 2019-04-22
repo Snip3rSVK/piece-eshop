@@ -21,9 +21,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/sass/variables';
-@import '~@/assets/sass/mixins';
-
 $transition-length: 0.25s;
 $font-size: 20px; // 1.25em
 $button-move-length: 3px;

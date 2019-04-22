@@ -7,7 +7,6 @@
 <style lang="scss">
 @import '~normalize.css';
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Raleway:400,700,900&subset=latin-ext');
-@import '~@/assets/sass/variables';
 
 body {
   min-height: 100vh;
