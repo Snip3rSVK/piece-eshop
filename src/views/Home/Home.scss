@@ -1,12 +1,17 @@
 .home-scene-landscape {
   height: 100%;
   overflow: hidden;
+  position: aboslute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .home {
   height: 100vh;
   overflow: hidden;
   user-select: none;
+  position: relative;
 }
 
 .home-landscape {
@@ -22,24 +27,18 @@
   background-size: cover;
 }
 
-.home-chocolate-pieces-landscape-wrapper {
-  width: 50%;
-  height: 102vh;
-  margin-left: -2%;
-  margin-top: -1vh;
-}
-
 .home-chocolate-pieces-landscape {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
+  width: 50%;
+  height: 102vh;
+  left: -2%;
+  top: -1vh;
   background-image: url('~@/assets/img/chocolate-pieces.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right center;
   z-index: 9;
+  transition: transform 0.2s linear;
   //animation: wave 4.88889s 0.1s infinite linear;
 }
 
@@ -53,28 +52,21 @@
   z-index: 10;
 }
 
-.home-chocolate-pieces-portrait-wrapper {
+.home-chocolate-pieces-portrait {
   position: absolute;
   width: 104vw;
   height: 60vh;
-  top: initial !important;
-  left: -2% !important;
-  right: -2% !important;
-  bottom: -2% !important;
-  display: none !important;
-}
-
-.home-chocolate-pieces-portrait {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  bottom: 0;
+  top: initial;
+  left: -2%;
+  right: -2%;
+  bottom: -2%;
+  display: none;
   background-image: url('~@/assets/img/chocolate-pieces-portrait.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   z-index: 9;
+  transition: transform 0.2s linear;
   //animation: wave 4.88889s 0.1s infinite linear;
 }
 
@@ -177,19 +169,20 @@
   background: $dark-brown;
   right: 0;
   top: 0;
+  transform-origin: top center;
 }
 
 .home-subtitle-line-from {
-  height: 0%;
+  transform: scaleY(0);
 }
 
 .home-subtitle-line-active {
   transition-delay: 800ms;
-  transition: 850ms height $ease-in-out-quint;
+  transition: 850ms transform $ease-in-out-quint;
 }
 
 .home-subtitle-line-to {
-  height: 100%;
+  transform: scaleY(1);
 }
 
 .home-subtitle {
@@ -251,12 +244,12 @@
     display: block;
   }
 
-  .home-chocolate-pieces-landscape-wrapper {
-    display: none !important;
+  .home-chocolate-pieces-landscape {
+    display: none;
   }
 
-  .home-chocolate-pieces-portrait-wrapper {
-    display: block !important;
+  .home-chocolate-pieces-portrait {
+    display: block;
   }
 
   .home-logo-wrapper {
@@ -335,18 +328,19 @@
     right: auto;
     width: 100%;
     height: 0.25em;
+    transform-origin: center left;
   }
 
   .home-subtitle-line-from {
-    width: 0;
+    transform: scaleX(0);
   }
 
   .home-subtitle-line-active {
-    transition: 850ms width $ease-in-out-quint;
+    transition: 850ms transform $ease-in-out-quint;
   }
 
   .home-subtitle-line-to {
-    width: 100%;
+    transform: scaleX(1);
   }
 
   .base-button {
