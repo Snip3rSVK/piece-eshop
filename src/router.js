@@ -17,9 +17,17 @@ export default new Router({
       path: '/eshop',
       name: 'eshop',
       // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
+      // this generates a separate chunk (eshop.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "eshop" */ './views/Eshop/Eshop.vue'),
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      // route level code-splitting
+      // this generates a separate chunk (admin.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "admin" */ './views/Admin/Admin.vue'),
     },
   ],
 });

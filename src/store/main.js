@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import shoppingCart from './modules/shoppingCart';
 import products from './modules/products';
+import orders from './modules/orders';
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ export default new Vuex.Store({
   modules: {
     shoppingCart,
     products,
+    orders,
   },
   state: {
 
