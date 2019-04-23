@@ -12,6 +12,9 @@
         K dispozícii: {{ product.inventory }}
       </div>
       <div>
+        Kategória: {{ product.category }}
+      </div>
+      <div>
         {{ product.description.substring(0, 100) }}...
       </div>
       <button

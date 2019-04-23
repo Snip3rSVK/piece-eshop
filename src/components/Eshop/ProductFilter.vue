@@ -1,5 +1,7 @@
 <template>
-  <div />
+  <div>
+    ss
+  </div>
 </template>
 
 <script>
