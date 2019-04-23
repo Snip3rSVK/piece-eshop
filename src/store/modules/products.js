@@ -8,7 +8,9 @@ const state = {
 };
 
 // getters
-const getters = {};
+const getters = {
+  getProductById: state => id => state.all.find(product => product.id === id),
+};
 
 // actions
 const actions = {
