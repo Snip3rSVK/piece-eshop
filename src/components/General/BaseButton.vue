@@ -11,12 +11,8 @@
 <script>
 export default {
   name: 'BaseButton',
-  props: {
-    to: {
-      type: String,
-      default: '/',
-    },
-  },
+  // eslint-disable-next-line vue/require-prop-types
+  props: ['to'],
 };
 </script>
 
@@ -40,6 +36,7 @@ $button-move-length: 3px;
   outline: 0;
   //overflow: hidden;
   position: relative;
+  display: inline-block;
 }
 
 .base-button:hover,

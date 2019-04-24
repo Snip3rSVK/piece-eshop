@@ -7,7 +7,7 @@ const products = [
     inventory: 3,
     weight: 512,
     category: 'whiteChocolate',
-    alergens: ['alergen1', 'alergen2'],
+    alergens: ['WWWWWWW', 'QQQQQQQQQQQQ'],
     nutritionValues: {
       blabla: 35.4,
       blabla2: 21.1,
@@ -27,10 +27,12 @@ const products = [
     inventory: 10,
     weight: 512,
     category: 'whiteChocolate',
-    alergens: ['alergen1', 'alergen2'],
+    alergens: ['sjfhsj', 'AAAAAA'],
     nutritionValues: {
-      blabla: 35.4,
-      blabla2: 21.1,
+      blabla: 15.9,
+      blabla2: 1.1,
+      ttttla4: 1.1,
+      blttttta2: 1.1,
     },
     description: `
       Marshmallow icing chocolate bar sweet roll cake cake. Pastry lemon drops jujubes cake dessert ice cream. Apple pie dessert pudding dragée lemon drops gummi bears tart jelly beans.
@@ -48,8 +50,8 @@ const products = [
     category: 'blackChocolate',
     alergens: ['alergen1', 'alergen2'],
     nutritionValues: {
-      blabla: 35.4,
-      blabla2: 21.1,
+      EEEEE: 30.4,
+      SSSSS: 17.9,
     },
     description: `
       Marshmallow icing chocolate bar sweet roll cake cake. Pastry lemon drops jujubes cake dessert ice cream. Apple pie dessert pudding dragée lemon drops gummi bears tart jelly beans.

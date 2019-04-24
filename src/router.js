@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home/Home.vue';
 import ProductItem from './components/Eshop/ProductItem.vue';
+import ProductList from './components/Eshop/ProductList.vue';
+import ShoppingCart from './components/Eshop/ShoppingCart.vue';
 
 Vue.use(Router);
 
@@ -15,17 +17,32 @@ export default new Router({
       component: Home,
     },
     {
-      path: 'product/:id',
-      name: 'product',
-      component: ProductItem,
-    },
-    {
       path: '/eshop',
-      name: 'eshop',
+      // name: 'eshop',
       // route level code-splitting
       // this generates a separate chunk (eshop.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "eshop" */ './views/Eshop/Eshop.vue'),
+      children: [
+        {
+          path: 'product/:id',
+          name: 'product',
+          component: ProductItem,
+          props: true,
+        },
+        {
+          path: '',
+          name: 'productList',
+          component: ProductList,
+          props: true,
+        },
+        {
+          path: 'cart',
+          name: 'cart',
+          component: ShoppingCart,
+          props: true,
+        },
+      ],
     },
     {
       path: '/admin',

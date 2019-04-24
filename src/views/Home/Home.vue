@@ -117,8 +117,8 @@ export default {
       this.needForRAF = true;
       this.$refs.chocolatePieces.forEach((elem) => {
         if (this.centerWidth && this.centerHeight) {
-          const translateX = Math.round((this.centerWidth - clientX) / 200);
-          const translateY = Math.round((this.centerHeight - clientY) / 200);
+          const translateX = Math.round((this.centerWidth - clientX) / 150);
+          const translateY = Math.round((this.centerHeight - clientY) / 150);
           // eslint-disable-next-line no-param-reassign
           elem.style.transform = `translate(${translateX}px, ${translateY}px)`;
         }

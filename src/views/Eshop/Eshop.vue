@@ -1,13 +1,26 @@
 <template>
   <div class="eshop">
     <h1>Na eshope sa pracuje...</h1>
+    <hr>
     <h2>Filter</h2>
     <ProductFilter />
     <hr>
-    <h2>Produkty</h2>
-    <ProductList />
+    <nav>
+      <ul style="display: flex">
+        <li>
+          <base-button to="/eshop/cart">
+            Košík
+          </base-button>
+        </li>
+        <li>
+          <base-button to="/eshop">
+            Produkty
+          </base-button>
+        </li>
+      </ul>
+    </nav>
     <hr>
-    <ShoppingCart />
+    <router-view />
     <hr>
     <base-button to="/admin">
       Administrácia
@@ -16,23 +29,20 @@
 </template>
 
 <script>
-import ProductList from '@/components/Eshop/ProductList.vue';
 import ProductFilter from '@/components/Eshop/ProductFilter.vue';
-import ShoppingCart from '@/components/Eshop/ShoppingCart.vue';
 import BaseButton from '@/components/General/BaseButton.vue';
 
 export default {
   components: {
-    ProductList,
-    ShoppingCart,
     ProductFilter,
     BaseButton,
+  },
+  created() {
+    this.$store.dispatch('products/getAllProducts');
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.base-button {
-  display: inline-block;
-}
+
 </style>
