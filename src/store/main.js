@@ -13,13 +13,7 @@ export default new Vuex.Store({
     products,
     orders,
   },
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  },
+  state: {},
+  mutations: {},
+  actions: {},
 });

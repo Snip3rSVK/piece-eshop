@@ -15,19 +15,17 @@ export default new Router({
       component: Home,
     },
     {
+      path: 'product/:id',
+      name: 'product',
+      component: ProductItem,
+    },
+    {
       path: '/eshop',
       name: 'eshop',
       // route level code-splitting
       // this generates a separate chunk (eshop.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "eshop" */ './views/Eshop/Eshop.vue'),
-      children: [
-        {
-          path: 'product/:id',
-          name: 'product',
-          component: ProductItem,
-        },
-      ],
     },
     {
       path: '/admin',

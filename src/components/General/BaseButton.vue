@@ -42,15 +42,17 @@ $button-move-length: 3px;
   position: relative;
 }
 
-.base-button:hover, .base-button:focus {
+.base-button:hover,
+.base-button:focus {
   //box-shadow: 0 0 0 em(6px, $font-size) $dark-brown inset;
   transition: all $transition-length $ease-out-cubic;
-  box-shadow: 0 0 0 em(4px, $font-size) $dark-brown inset, 0px 7px 25px 0px rgba(0,0,0,0.1);
+  box-shadow: 0 0 0 em(4px, $font-size) $dark-brown inset, 0px 7px 25px 0px rgba(0, 0, 0, 0.1);
   transform: translateY(-$button-move-length);
 }
 
-.base-button:hover::after, .base-button:focus::after {
-  content: "";
+.base-button:hover::after,
+.base-button:focus::after {
+  content: '';
   width: 100%;
   height: 100%;
   border-radius: 100rem;

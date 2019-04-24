@@ -7,10 +7,7 @@ const products = [
     inventory: 3,
     weight: 512,
     category: 'whiteChocolate',
-    alergens: [
-      'alergen1',
-      'alergen2',
-    ],
+    alergens: ['alergen1', 'alergen2'],
     nutritionValues: {
       blabla: 35.4,
       blabla2: 21.1,
@@ -30,10 +27,7 @@ const products = [
     inventory: 10,
     weight: 512,
     category: 'whiteChocolate',
-    alergens: [
-      'alergen1',
-      'alergen2',
-    ],
+    alergens: ['alergen1', 'alergen2'],
     nutritionValues: {
       blabla: 35.4,
       blabla2: 21.1,
@@ -52,10 +46,7 @@ const products = [
     price: 18.99,
     inventory: 6,
     category: 'blackChocolate',
-    alergens: [
-      'alergen1',
-      'alergen2',
-    ],
+    alergens: ['alergen1', 'alergen2'],
     nutritionValues: {
       blabla: 35.4,
       blabla2: 21.1,
@@ -79,9 +70,7 @@ export default {
     setTimeout(() => {
       // simulate random checkout failure.
       // eslint-disable-next-line no-unused-expressions
-      (Math.random() > 0.5 || navigator.userAgent.indexOf('PhantomJS') > -1)
-        ? cb()
-        : errorCb();
+      Math.random() > 0.5 || navigator.userAgent.indexOf('PhantomJS') > -1 ? cb() : errorCb();
     }, 100);
   },
 };

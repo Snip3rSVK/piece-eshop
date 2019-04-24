@@ -4,11 +4,14 @@
     @mousemove="parallaxMove"
     @touchmove="parallaxMove"
   >
+    <!-- eslint-disable-next-line vue/no-unused-vars -->
     <template v-for="i in 1">
+      <!-- eslint-disable-next-line vue/require-v-for-key -->
       <div
         ref="chocolatePieces"
         class="home-chocolate-pieces-landscape"
       />
+      <!-- eslint-disable-next-line vue/require-v-for-key -->
       <div
         ref="chocolatePieces"
         class="home-chocolate-pieces-portrait"
@@ -116,6 +119,7 @@ export default {
         if (this.centerWidth && this.centerHeight) {
           const translateX = Math.round((this.centerWidth - clientX) / 200);
           const translateY = Math.round((this.centerHeight - clientY) / 200);
+          // eslint-disable-next-line no-param-reassign
           elem.style.transform = `translate(${translateX}px, ${translateY}px)`;
         }
       });
