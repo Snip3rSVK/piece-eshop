@@ -44,6 +44,7 @@ const ApiService = {
      * @param {String} [data.auth.password]
     * */
   customRequest(data) {
+    console.log('customRequestToApi:', data);
     return axios(data);
   },
 
