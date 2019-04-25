@@ -20,7 +20,7 @@ const UserService = {
   async login(email, password) {
     const requestData = {
       method: 'post',
-      url: '/Piece/server/api/token.php',
+      url: '/api/token.php',
       data: {
         grant_type: 'password',
         username: email,
