@@ -6,12 +6,12 @@ const ApiService = {
   // interceptor401: null,
 
   init(baseURL) {
-    console.log('API: setting baseURL', baseURL);
+    console.log('API: setting baseURL:', baseURL);
     axios.defaults.baseURL = baseURL;
   },
 
   setHeader() {
-    console.log('API: setting authorization header', `Bearer ${TokenService.getToken()}`);
+    console.log('API: setting authorization header:', `Bearer ${TokenService.getToken()}`);
     axios.defaults.headers.common.Authorization = `Bearer ${TokenService.getToken()}`;
   },
 
@@ -21,7 +21,7 @@ const ApiService = {
   },
 
   get(resource) {
-    console.log('API: postRequestToApi:', resource);
+    console.log('API: getRequestToApi:', resource);
     return axios.get(resource);
   },
 
@@ -36,7 +36,7 @@ const ApiService = {
   },
 
   delete(resource) {
-    console.log('API: deletetRequestToApi:', resource);
+    console.log('API: deleteRequestToApi:', resource);
     return axios.delete(resource);
   },
 
@@ -51,7 +51,7 @@ const ApiService = {
      * @param {String} [data.auth.password]
     * */
   customRequest(data) {
-    console.log('customRequestToApi:', data);
+    console.log('API: customRequestToApi:', data);
     return axios(data);
   },
 
