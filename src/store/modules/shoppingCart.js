@@ -45,7 +45,8 @@ const actions = {
       const cartItem = state.items.find(item => item.id === product.id);
       if (!cartItem) {
         commit('pushProductToCart', { id: product.id });
-      } else {
+      }
+      else {
         commit('incrementItemQuantity', cartItem);
       }
       // remove 1 item from stock

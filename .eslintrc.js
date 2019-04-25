@@ -9,6 +9,7 @@ module.exports = {
     'no-console': 'off',
     'no-debugger': 'off',
     'no-plusplus': 'off',
+    'brace-style': [2, 'stroustrup'],
     'vue/array-bracket-spacing': 1,
     'vue/arrow-spacing': 2,
     'vue/block-spacing': 1,

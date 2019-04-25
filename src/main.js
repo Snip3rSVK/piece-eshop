@@ -2,6 +2,15 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store/main';
+import ApiService from './services/api/api';
+import TokenService from './services/token/token';
+
+ApiService.init(process.env.VUE_APP_ROOT_API);
+
+// If token exists set header
+if (TokenService.getToken()) {
+  ApiService.setHeader();
+}
 
 Vue.config.productionTip = false;
 
