@@ -14,7 +14,7 @@ const UserService = {
   /**
      * Login the user and store the access token to TokenService.
      *
-     * @returns access_token
+     * @returns accessToken
      * @throws AuthenticationError
     * */
   async login(email, password) {
@@ -35,13 +35,13 @@ const UserService = {
     try {
       const response = await ApiService.customRequest(requestData);
 
-      TokenService.saveToken(response.data.access_token);
-      TokenService.saveRefreshToken(response.data.refresh_token);
+      TokenService.saveToken(response.data.accessToken);
+      TokenService.saveRefreshToken(response.data.refreshToken);
       ApiService.setHeader();
 
       ApiService.mount401Interceptor();
 
-      return response.data.access_token;
+      return response.data.accessToken;
     }
     catch (error) {
       throw new AuthenticationError(error.response.status, error.response.data.detail);
@@ -56,10 +56,10 @@ const UserService = {
 
     const requestData = {
       method: 'post',
-      url: '/o/token/',
+      url: '/api/token.php',
       data: {
-        grant_type: 'refresh_token',
-        refresh_token: refreshToken,
+        grant_type: 'refreshToken',
+        refreshToken,
       },
       /* auth: {
         username: process.env.VUE_APP_CLIENT_ID,
@@ -70,12 +70,12 @@ const UserService = {
     try {
       const response = await ApiService.customRequest(requestData);
 
-      TokenService.saveToken(response.data.access_token);
-      TokenService.saveRefreshToken(response.data.refresh_token);
+      TokenService.saveToken(response.data.accessToken);
+      TokenService.saveRefreshToken(response.data.refreshToken);
       // Update the header in ApiService
       ApiService.setHeader();
 
-      return response.data.access_token;
+      return response.data.accessToken;
     }
     catch (error) {
       throw new AuthenticationError(error.response.status, error.response.data.detail);
