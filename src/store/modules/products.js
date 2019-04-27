@@ -10,6 +10,11 @@ const state = {
 // getters
 const getters = {
   getProductById: state => id => state.all.find(product => product.id === id),
+  // eslint-disable-next-line arrow-body-style
+  getProductsByCategory: (state) => {
+    return category => state.all.filter(product => product.category === category);
+  },
+  getProducts: state => state.all,
 };
 
 // actions

@@ -4,6 +4,7 @@ import shoppingCart from './modules/shoppingCart';
 import products from './modules/products';
 import orders from './modules/orders';
 import auth from './modules/auth';
+import title from './modules/title';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     products,
     orders,
     auth,
+    title,
   },
   state: {},
   mutations: {},

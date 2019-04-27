@@ -20,7 +20,7 @@ const UserService = {
   async login(email, password) {
     const requestData = {
       method: 'post',
-      url: '/api/token.php/',
+      url: '/api/login.php/',
       data: {
         grantType: 'password',
         email,
@@ -58,7 +58,7 @@ const UserService = {
     const requestData = {
       method: 'post',
       // another url maybe
-      url: '/api/token.php/',
+      url: '/api/login.php/',
       data: {
         grantType: 'refreshToken',
         refreshToken,

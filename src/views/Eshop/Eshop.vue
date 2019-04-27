@@ -2,39 +2,29 @@
   <div class="eshop">
     <sidebar-menu />
     <main>
-      <h1>Na eshope sa pracuje...</h1>
-      <nav>
-        <ul style="display: flex">
-          <li>
-            <base-button to="/eshop/cart">
-              Košík
-            </base-button>
-          </li>
-          <li>
-            <base-button to="/eshop">
-              Produkty
-            </base-button>
-          </li>
-        </ul>
-      </nav>
-      <hr>
+      <page-title />
       <router-view />
       <hr>
       <base-button to="/admin">
         Administrácia
       </base-button>
     </main>
+    <sidebar-cart />
   </div>
 </template>
 
 <script>
 import BaseButton from '@/components/General/BaseButton.vue';
 import SidebarMenu from '@/components/Eshop/SidebarMenu.vue';
+import SidebarCart from '@/components/Eshop/SidebarCart.vue';
+import PageTitle from '@/components/PageTitle/PageTitle.vue';
 
 export default {
   components: {
     BaseButton,
     SidebarMenu,
+    SidebarCart,
+    PageTitle,
   },
   created() {
     this.$store.dispatch('products/getAllProducts');
@@ -54,5 +44,9 @@ export default {
 
   main {
     grid-column: 2;
+  }
+
+  .sidebar-cart {
+    grid-column: 3;
   }
 </style>

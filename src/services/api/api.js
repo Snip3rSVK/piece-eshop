@@ -11,8 +11,8 @@ const ApiService = {
   },
 
   setHeader() {
-    console.log('API: setting authorization header:', `Bearer ${TokenService.getToken()}`);
-    axios.defaults.headers.common.Authorization = `Bearer ${TokenService.getToken()}`;
+    console.log('API: setting Refresh-Token header:', `${TokenService.getToken()}`);
+    axios.defaults.headers.common['Refresh-Token'] = `${TokenService.getToken()}`;
   },
 
   removeHeader() {

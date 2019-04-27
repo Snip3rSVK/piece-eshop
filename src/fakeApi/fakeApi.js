@@ -6,7 +6,7 @@ const products = [
     price: 27.54,
     inventory: 3,
     weight: 512,
-    category: 'whiteChocolate',
+    category: 'chocolate',
     alergens: ['WWWWWWW', 'QQQQQQQQQQQQ'],
     nutritionValues: {
       blabla: 35.4,
@@ -26,7 +26,7 @@ const products = [
     price: 12.99,
     inventory: 10,
     weight: 512,
-    category: 'whiteChocolate',
+    category: 'praline',
     alergens: ['sjfhsj', 'AAAAAA'],
     nutritionValues: {
       blabla: 15.9,
@@ -47,7 +47,7 @@ const products = [
     title: 'Santander Magic 85%',
     price: 18.99,
     inventory: 6,
-    category: 'blackChocolate',
+    category: 'chocolate',
     alergens: ['alergen1', 'alergen2'],
     nutritionValues: {
       EEEEE: 30.4,

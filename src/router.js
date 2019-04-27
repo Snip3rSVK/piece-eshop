@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home/Home.vue';
-import ProductItem from './components/Eshop/ProductItem.vue';
+import ProductDetail from './components/Eshop/ProductDetail.vue';
 import ProductList from './components/Eshop/ProductList.vue';
 import ShoppingCart from './components/Eshop/ShoppingCart.vue';
+import NotFound from './components/NotFound/NotFound.vue';
 import TokenService from './services/token/token';
 
 Vue.use(Router);
@@ -18,6 +19,14 @@ const router = new Router({
       component: Home,
     },
     {
+      path: '/404',
+      component: NotFound,
+    },
+    {
+      path: '*',
+      redirect: '/404',
+    },
+    {
       path: '/eshop',
       // name: 'eshop',
       // route level code-splitting
@@ -28,12 +37,18 @@ const router = new Router({
         {
           path: 'product/:id',
           name: 'product',
-          component: ProductItem,
+          component: ProductDetail,
           props: true,
         },
         {
           path: '',
           name: 'productList',
+          component: ProductList,
+          props: true,
+        },
+        {
+          path: 'category/:category',
+          name: 'productListCategory',
           component: ProductList,
           props: true,
         },

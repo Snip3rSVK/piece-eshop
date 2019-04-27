@@ -1,38 +1,83 @@
 <template>
-  <ul>
-    <li
+  <ul v-if="products.length">
+    <product-list-item
       v-for="product in products"
       :key="product.id"
-    >
-      <!-- {{ product.title }} - {{ product.price | currency }} -->
-      <div>{{ product.title }} - {{ product.price }}</div>
-      <div>K dispozícii: {{ product.inventory }}</div>
-      <div>Kategória: {{ product.category }}</div>
-      <button
-        :disabled="!product.inventory"
-        @click="addProductToCart(product)"
-      >
-        Pridať do košíka
-      </button>
-      <base-button :to="'eshop/product/' + product.id">
-        Detail
-      </base-button>
-    </li>
+      :item-id="product.id"
+      item-img="ssss"
+      :item-title="product.title"
+      :item-price="product.price"
+    />
   </ul>
+  <div v-else>
+    Žiaden produkt nebol nájdený
+  </div>
 </template>
 
 <script>
-import BaseButton from '@/components/General/BaseButton.vue';
-import { mapState, mapActions } from 'vuex';
+import ProductListItem from '@/components/Eshop/ProductListItem.vue';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   components: {
-    'base-button': BaseButton,
+    ProductListItem,
   },
-  computed: mapState({
-    products: state => state.products.all,
-  }),
-  methods: mapActions('shoppingCart', ['addProductToCart']),
+  props: {
+    // this could be done because of added "props" in router.js
+    category: {
+      type: String,
+      default: null,
+    },
+  },
+  computed: {
+    ...mapGetters('products', [
+      'getProducts',
+      'getProductsByCategory',
+    ]),
+    products() {
+      if (this.category) {
+        return this.getProductsByCategory(this.category);
+      }
+
+      return this.getProducts;
+    },
+  },
+  watch: {
+    category() {
+      this.changeTitle();
+    },
+  },
+  created() {
+    this.changeTitle();
+  },
+  methods: {
+    ...mapActions('shoppingCart', [
+      'addProductToCart',
+    ]),
+    ...mapMutations('title', [
+      'setTitle',
+      'setSubtitle',
+    ]),
+    changeTitle() {
+      if (this.category) {
+        let translatedCategory = '';
+
+        if (this.category === 'chocolate') {
+          translatedCategory = 'Čokolády';
+        }
+        else if (this.category === 'praline') {
+          translatedCategory = 'Pralinky';
+        }
+
+        this.setTitle(translatedCategory || this.category);
+        this.setSubtitle('Kategória');
+      }
+      else {
+        this.setTitle('Piece');
+        this.setSubtitle('Čokoládovňa');
+      }
+    },
+  },
 };
 </script>
 

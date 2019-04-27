@@ -18,6 +18,8 @@ const getters = {
     };
   }),
 
+  cartNumberOfProducts: state => state.items.length,
+
   // eslint-disable-next-line max-len
   cartTotalPrice: (state, getters) => getters.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0),
 };

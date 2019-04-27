@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   props: {
@@ -47,11 +47,26 @@ export default {
       return this.getProductById(Number(this.id));
     },
   },
+  watch: {
+    product() {
+      this.changeTitle();
+    },
+  },
   created() {
-    console.log(this.getProductById(Number(this.id)));
+    this.changeTitle();
   },
   methods: {
     ...mapActions('shoppingCart', ['addProductToCart']),
+    ...mapMutations('title', [
+      'setTitle',
+      'setSubtitle',
+    ]),
+    changeTitle() {
+      if (this.product) {
+        this.setTitle(this.product.title);
+        this.setSubtitle('Detail');
+      }
+    },
   },
 };
 </script>
