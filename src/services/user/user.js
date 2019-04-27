@@ -20,10 +20,10 @@ const UserService = {
   async login(email, password) {
     const requestData = {
       method: 'post',
-      url: '/api/token.php',
+      url: '/api/token.php/',
       data: {
-        grant_type: 'password',
-        username: email,
+        grantType: 'password',
+        email,
         password,
       },
       /* auth: {
@@ -34,12 +34,13 @@ const UserService = {
 
     try {
       const response = await ApiService.customRequest(requestData);
+      console.log('user response (login):', response);
 
       TokenService.saveToken(response.data.accessToken);
       TokenService.saveRefreshToken(response.data.refreshToken);
       ApiService.setHeader();
 
-      ApiService.mount401Interceptor();
+      // ApiService.mount401Interceptor();
 
       return response.data.accessToken;
     }
@@ -56,9 +57,10 @@ const UserService = {
 
     const requestData = {
       method: 'post',
-      url: '/api/token.php',
+      // another url maybe
+      url: '/api/token.php/',
       data: {
-        grant_type: 'refreshToken',
+        grantType: 'refreshToken',
         refreshToken,
       },
       /* auth: {
@@ -69,7 +71,7 @@ const UserService = {
 
     try {
       const response = await ApiService.customRequest(requestData);
-
+      console.log('user response (refreshToken):', response);
       TokenService.saveToken(response.data.accessToken);
       TokenService.saveRefreshToken(response.data.refreshToken);
       // Update the header in ApiService
@@ -93,7 +95,7 @@ const UserService = {
     TokenService.removeRefreshToken();
     ApiService.removeHeader();
 
-    ApiService.unmount401Interceptor();
+    // ApiService.unmount401Interceptor();
   },
 };
 

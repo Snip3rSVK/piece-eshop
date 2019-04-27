@@ -33,8 +33,8 @@ const actions = {
       const token = await UserService.login(email, password);
       commit('loginSuccess', token);
 
-      // Redirect the user to the page he first tried to visit or to the home view
-      router.push(router.history.current.query.redirect || '/');
+      // Redirect the user to the page he first tried to visit or to the admin
+      router.push(router.history.current.query.redirect || '/admin');
 
       return true;
     }

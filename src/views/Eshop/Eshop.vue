@@ -1,41 +1,40 @@
 <template>
   <div class="eshop">
-    <h1>Na eshope sa pracuje...</h1>
-    <hr>
-    <h2>Filter</h2>
-    <ProductFilter />
-    <hr>
-    <nav>
-      <ul style="display: flex">
-        <li>
-          <base-button to="/eshop/cart">
-            Košík
-          </base-button>
-        </li>
-        <li>
-          <base-button to="/eshop">
-            Produkty
-          </base-button>
-        </li>
-      </ul>
-    </nav>
-    <hr>
-    <router-view />
-    <hr>
-    <base-button to="/admin">
-      Administrácia
-    </base-button>
+    <sidebar-menu />
+    <main>
+      <h1>Na eshope sa pracuje...</h1>
+      <nav>
+        <ul style="display: flex">
+          <li>
+            <base-button to="/eshop/cart">
+              Košík
+            </base-button>
+          </li>
+          <li>
+            <base-button to="/eshop">
+              Produkty
+            </base-button>
+          </li>
+        </ul>
+      </nav>
+      <hr>
+      <router-view />
+      <hr>
+      <base-button to="/admin">
+        Administrácia
+      </base-button>
+    </main>
   </div>
 </template>
 
 <script>
-import ProductFilter from '@/components/Eshop/ProductFilter.vue';
 import BaseButton from '@/components/General/BaseButton.vue';
+import SidebarMenu from '@/components/Eshop/SidebarMenu.vue';
 
 export default {
   components: {
-    ProductFilter,
     BaseButton,
+    SidebarMenu,
   },
   created() {
     this.$store.dispatch('products/getAllProducts');
@@ -44,5 +43,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .eshop {
+    display: grid;
+    grid-template-columns: 15.625rem auto 9.375rem;
+  }
 
+  .sidebar-menu {
+    grid-column: 1;
+  }
+
+  main {
+    grid-column: 2;
+  }
 </style>
