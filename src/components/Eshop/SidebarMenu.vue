@@ -133,6 +133,11 @@ ul {
   font-weight: bold;
   padding: 5px 0;
   cursor: pointer;
+  transition: opacity 0.25s;
+}
+
+.sidebar-menu-main-navigation-main-link:hover {
+  opacity: 0.8;
 }
 
 .sidebar-menu-content-sub {

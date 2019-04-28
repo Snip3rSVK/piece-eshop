@@ -15,15 +15,38 @@
 
 <script>
 export default {
+  // eslint-disable-next-line vue/require-prop-types
   props: ['itemId', 'itemImg', 'itemTitle', 'itemPrice'],
-  mounted() {
-    setTimeout(() => {
-      console.log(this.itemId, this.itemImg, this.itemTitle, this.itemPrice);
-    }, 5000);
-  },
 };
 </script>
 
 <style lang="scss" scoped>
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 
+.product-list-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  //background: red;
+}
+
+// 460 / 280
+.product-list-item-img {
+  border-radius: 10px;
+  padding-top: 171.428571429%;
+  width: 100%;
+  background-image: radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505) !important;
+}
+
+.product-list-item-title {
+  margin-top: 0.75rem;
+  font-weight: bold;
+}
 </style>

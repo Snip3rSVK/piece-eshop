@@ -10,6 +10,7 @@
       </base-button>
     </main>
     <sidebar-cart />
+    <shopping-cart />
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import BaseButton from '@/components/General/BaseButton.vue';
 import SidebarMenu from '@/components/Eshop/SidebarMenu.vue';
 import SidebarCart from '@/components/Eshop/SidebarCart.vue';
 import PageTitle from '@/components/PageTitle/PageTitle.vue';
+import ShoppingCart from '@/components/Eshop/ShoppingCart.vue';
 
 export default {
   components: {
@@ -25,6 +27,7 @@ export default {
     SidebarMenu,
     SidebarCart,
     PageTitle,
+    ShoppingCart,
   },
   created() {
     this.$store.dispatch('products/getAllProducts');

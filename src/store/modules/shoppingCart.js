@@ -6,6 +6,7 @@ import fakeApi from '@/fakeApi/fakeApi';
 const state = {
   items: [],
   checkoutStatus: null,
+  opened: false,
 };
 
 const getters = {
@@ -22,6 +23,8 @@ const getters = {
 
   // eslint-disable-next-line max-len
   cartTotalPrice: (state, getters) => getters.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0),
+
+  isOpened: state => state.opened,
 };
 
 const actions = {
@@ -76,6 +79,14 @@ const mutations = {
 
   setCheckoutStatus(state, status) {
     state.checkoutStatus = status;
+  },
+
+  showCart(state) {
+    state.opened = true;
+  },
+
+  hideCart(state) {
+    state.opened = false;
   },
 };
 

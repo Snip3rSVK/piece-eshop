@@ -1,5 +1,8 @@
 <template>
-  <ul v-if="products.length">
+  <ul
+    v-if="products.length"
+    class="product-list"
+  >
     <product-list-item
       v-for="product in products"
       :key="product.id"
@@ -82,7 +85,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-li {
-  margin-bottom: 0.5em;
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.product-list {
+  display: block;
+  width: 100%;
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 </style>

@@ -1,21 +1,30 @@
 <template>
-  <div class="sidebar-cart">
-    <router-link
-      to="/eshop/cart"
+  <aside class="sidebar-cart">
+    <a
       class="sidebar-cart-content"
+      @click="showCart()"
     >
-      <span class="sidebar-cart-text">Košík</span>
+      <span
+        class="sidebar-cart-text"
+      >
+        Košík
+      </span>
       <span class="sidebar-cart-circle">{{ cartNumberOfProducts }}</span>
-    </router-link>
-  </div>
+    </a>
+  </aside>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   computed: {
     ...mapGetters('shoppingCart', ['cartNumberOfProducts']),
+  },
+  methods: {
+    ...mapMutations('shoppingCart', [
+      'showCart',
+    ]),
   },
 };
 </script>
@@ -48,6 +57,12 @@ a:hover {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.sidebar-cart-text {
+  font-size: 0.9375rem;
+  font-weight: bold;
 }
 
 .sidebar-cart-circle {

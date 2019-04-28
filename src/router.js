@@ -52,12 +52,12 @@ const router = new Router({
           component: ProductList,
           props: true,
         },
-        {
+/*         {
           path: 'cart',
           name: 'cart',
           component: ShoppingCart,
           props: true,
-        },
+        }, */
       ],
     },
     {
@@ -80,6 +80,9 @@ const router = new Router({
       },
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  },
 });
 
 // eslint-disable-next-line consistent-return

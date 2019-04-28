@@ -1,32 +1,43 @@
 <template>
   <div v-if="product">
-    <h1>Produkt detail</h1>
-    <div>{{ product.title }} - {{ product.price }}</div>
-    <div>K dispozícii: {{ product.inventory }}</div>
-    <div>Kategória: {{ product.category }}</div>
-    <div>Popis: {{ product.description }}</div>
-    <div>
-      <h2>Alergény</h2>
-      <ul>
-        <!-- eslint-disable-next-line vue/require-v-for-key -->
-        <li v-for="alergen in product.alergens">
-          {{ alergen }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>Nutričné hodnoty</h2>
-      <!-- eslint-disable-next-line vue/require-v-for-key -->
-      <div v-for="(value, key) in product.nutritionValues">
-        <strong>{{ key }}:</strong> {{ value }}
+    <div
+      :style="'background-image: url()'"
+      class="product-detail-img"
+    />
+    <div
+      :style="'background-image: url()'"
+      class="product-detail-img"
+    />
+    <div class="product-detail-content">
+      <div class="product-detail-content-price">
+        {{ product.price }}
       </div>
+      <div>K dispozícii: {{ product.inventory }}</div>
+      <div>Kategória: {{ product.category }}</div>
+      <div>Popis: {{ product.description | shorten(100) }}</div>
+      <div>
+        <h2>Alergény</h2>
+        <ul>
+          <!-- eslint-disable-next-line vue/require-v-for-key -->
+          <li v-for="alergen in product.alergens">
+            {{ alergen }}
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>Nutričné hodnoty</h2>
+        <!-- eslint-disable-next-line vue/require-v-for-key -->
+        <div v-for="(value, key) in product.nutritionValues">
+          <strong>{{ key }}:</strong> {{ value }}
+        </div>
+      </div>
+      <button
+        :disabled="!product.inventory"
+        @click="addProductToCart(product)"
+      >
+        Pridať do košíka
+      </button>
     </div>
-    <button
-      :disabled="!product.inventory"
-      @click="addProductToCart(product)"
-    >
-      Pridať do košíka
-    </button>
   </div>
 </template>
 
@@ -54,12 +65,18 @@ export default {
   },
   created() {
     this.changeTitle();
+    this.setSideView();
+  },
+  beforeDestroy() {
+    this.setNormalView();
   },
   methods: {
     ...mapActions('shoppingCart', ['addProductToCart']),
     ...mapMutations('title', [
       'setTitle',
       'setSubtitle',
+      'setSideView',
+      'setNormalView',
     ]),
     changeTitle() {
       if (this.product) {
@@ -71,4 +88,31 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.product-detail-img {
+  margin-bottom: 50px;
+  border-radius: 10px;
+  // 171.428571429 / (100 / 70) = 120
+  padding-top: 120%;
+  width: 70%;
+  height: 0;
+  background-image: radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505) !important;
+}
+
+.product-detail-img:first-of-type {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.product-detail-content {
+  height: 100vh;
+  position: fixed;
+  width: calc(0.3 * (100vw - 150px - 250px) + 150px - 50px);
+  box-sizing: border-box;
+  top: 0;
+  right: 0;
+  display: block;
+  padding-top: 11rem;
+  padding-right: 40px;
+}
+</style>

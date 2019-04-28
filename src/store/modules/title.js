@@ -3,6 +3,7 @@
 const state = {
   title: '',
   subtitle: '',
+  sideView: false,
 };
 
 const getters = {
@@ -12,6 +13,10 @@ const getters = {
 
   getSubtitle(state) {
     return state.subtitle;
+  },
+
+  getSideView(state) {
+    return state.sideView;
   },
 };
 
@@ -24,6 +29,14 @@ const mutations = {
 
   setSubtitle(state, subtitle) {
     state.subtitle = subtitle;
+  },
+
+  setSideView(state) {
+    state.sideView = true;
+  },
+
+  setNormalView(state) {
+    state.sideView = false;
   },
 };
 
