@@ -12,27 +12,29 @@
       <div class="product-detail-content-price">
         {{ product.price }}
       </div>
-      <div>K dispozícii: {{ product.inventory }}</div>
+      <div>K dispozícii: {{ product.stock }}</div>
       <div>Kategória: {{ product.category }}</div>
       <div>Popis: {{ product.description | shorten(100) }}</div>
       <div>
         <h2>Alergény</h2>
         <ul>
           <!-- eslint-disable-next-line vue/require-v-for-key -->
-          <li v-for="alergen in product.alergens">
-            {{ alergen }}
+          <li v-for="allergen in product.allergens">
+            {{ allergen }}
           </li>
         </ul>
       </div>
       <div>
         <h2>Nutričné hodnoty</h2>
-        <!-- eslint-disable-next-line vue/require-v-for-key -->
-        <div v-for="(value, key) in product.nutritionValues">
+        <div
+          v-for="(value, key) in product.nutritionInfo"
+          :key="key"
+        >
           <strong>{{ key }}:</strong> {{ value }}
         </div>
       </div>
       <button
-        :disabled="!product.inventory"
+        :disabled="!product.stock"
         @click="addProductToCart(product)"
       >
         Pridať do košíka

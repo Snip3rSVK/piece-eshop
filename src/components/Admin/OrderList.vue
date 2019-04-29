@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <router-view />
-  </div>
+  <ul class="order-list">
+    ooo
+  </ul>
 </template>
 
 <script>
@@ -17,11 +17,13 @@ export default {
       'setSubtitle',
     ]),
     changeTitle() {
-      this.setTitle('Administrácia');
-      this.setSubtitle('Úvod');
+      this.setTitle('Objednávky');
+      this.setSubtitle('Administrácia');
     },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

@@ -3,8 +3,11 @@ import Router from 'vue-router';
 import Home from './views/Home/Home.vue';
 import ProductDetail from './components/Eshop/ProductDetail.vue';
 import ProductList from './components/Eshop/ProductList.vue';
-import ShoppingCart from './components/Eshop/ShoppingCart.vue';
 import NotFound from './components/NotFound/NotFound.vue';
+import AdminOrderList from './components/Admin/OrderList.vue';
+import AdminProductList from './components/Admin/ProductList.vue';
+import AdminOrderDetail from './components/Admin/OrderDetail.vue';
+import AdminProductDetail from './components/Admin/ProductDetail.vue';
 import TokenService from './services/token/token';
 
 Vue.use(Router);
@@ -52,34 +55,50 @@ const router = new Router({
           component: ProductList,
           props: true,
         },
-/*         {
-          path: 'cart',
-          name: 'cart',
-          component: ShoppingCart,
-          props: true,
-        }, */
+        {
+          path: '/login',
+          name: 'login',
+          component: () => import(/* webpackChunkName: "login" */ './views/Login/Login.vue'),
+          meta: {
+            redirectIfAuth: true,
+          },
+        },
+        {
+          path: '/admin',
+          name: 'admin',
+          component: () => import(/* webpackChunkName: "admin" */ './views/Admin/Admin.vue'),
+          meta: {
+            requiresAuth: true,
+          },
+          children: [
+            {
+              path: 'products',
+              name: 'adminProductList',
+              component: AdminProductList,
+            },
+            {
+              path: 'orders',
+              name: 'adminOrderList',
+              component: AdminOrderList,
+            },
+            {
+              path: 'product/:id',
+              name: 'adminProduct',
+              component: AdminProductDetail,
+              props: true,
+            },
+            {
+              path: 'order/:id',
+              name: 'adminOrder',
+              component: AdminOrderDetail,
+              props: true,
+            },
+          ],
+        },
       ],
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import(/* webpackChunkName: "login" */ './views/Login/Login.vue'),
-      meta: {
-        redirectIfAuth: true,
-      },
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      // route level code-splitting
-      // this generates a separate chunk (admin.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "admin" */ './views/Admin/Admin.vue'),
-      meta: {
-        requiresAuth: true,
-      },
-    },
   ],
+  // eslint-disable-next-line no-unused-vars
   scrollBehavior(to, from, savedPosition) {
     return { x: 0, y: 0 };
   },

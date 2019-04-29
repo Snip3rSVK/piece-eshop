@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 <template>
   <aside class="sidebar-menu">
     <!-- <img
@@ -26,7 +27,7 @@
           <li>
             <div
               class="sidebar-menu-main-navigation-main-link"
-              @click="showCategories = !showCategories"
+              @click="showCategories = !showCategories; showCategories ? showAdministration = false : ''"
             >
               Kategórie
             </div>
@@ -43,6 +44,36 @@
                 <li class="sidebar-menu-main-navigation-sub-link">
                   <router-link to="/eshop/category/praline">
                     Pralinky
+                  </router-link>
+                </li>
+                <li class="sidebar-menu-main-navigation-sub-link">
+                  <router-link to="/eshop/category/praline_set">
+                    Pralinky - set
+                  </router-link>
+                </li>
+              </ul>
+            </transition>
+          </li>
+          <li v-show="loggedIn">
+            <div
+              class="sidebar-menu-main-navigation-main-link"
+              @click="showAdministration = !showAdministration; showAdministration ? showCategories = false : ''"
+            >
+              Administrácia
+            </div>
+            <transition name="show-sub">
+              <ul
+                v-show="showAdministration"
+                class="sidebar-menu-content-sub admin"
+              >
+                <li class="sidebar-menu-main-navigation-sub-link">
+                  <router-link to="/admin/products">
+                    Produkty
+                  </router-link>
+                </li>
+                <li class="sidebar-menu-main-navigation-sub-link">
+                  <router-link to="/admin/orders">
+                    Objednávky
                   </router-link>
                 </li>
               </ul>
@@ -62,11 +93,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
       showCategories: false,
+      showAdministration: false,
     };
+  },
+  computed: {
+    ...mapGetters('auth', [
+      'loggedIn',
+    ]),
   },
   methods: {
     goToHomePage() {
@@ -144,6 +183,10 @@ ul {
   box-sizing: border-box;
   overflow: hidden;
   line-height: 1.7;
+  max-height: 110px;
+}
+
+.sidebar-menu-content-sub.admin {
   max-height: 85px;
 }
 
@@ -156,7 +199,7 @@ ul {
 }
 
 .show-sub-enter, .show-sub-leave-to {
-  max-height: 0;
+  max-height: 0 !important;
 }
 
 .sidebar-menu-main-navigation-sub-link:first-of-type {

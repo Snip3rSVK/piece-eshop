@@ -11,20 +11,46 @@
       </span>
       <span class="sidebar-cart-circle">{{ cartNumberOfProducts }}</span>
     </a>
+    <a
+      class="sidebar-cart-content"
+      @click="logInOrLogOut"
+    >
+      <span
+        class="sidebar-cart-text"
+      >
+        {{ loggedIn ? 'Odhlásiť sa' : 'Prihlásenie' }}
+      </span>
+    </a>
   </aside>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters('shoppingCart', ['cartNumberOfProducts']),
+    ...mapGetters('shoppingCart', [
+      'cartNumberOfProducts',
+    ]),
+    ...mapGetters('auth', [
+      'loggedIn',
+    ]),
   },
   methods: {
     ...mapMutations('shoppingCart', [
       'showCart',
     ]),
+    ...mapActions('auth', [
+      'logout',
+    ]),
+    logInOrLogOut() {
+      if (this.loggedIn) {
+        this.logout();
+      }
+      else {
+        this.$router.push('');
+      }
+    },
   },
 };
 </script>
@@ -48,9 +74,11 @@ a:hover {
   right: 0;
   top: 0;
   padding-top: 4.375rem;
+  padding-left: 36px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
+  flex-direction: column;
 }
 
 .sidebar-cart-content {
@@ -58,6 +86,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 0.5rem;
 }
 
 .sidebar-cart-text {

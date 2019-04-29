@@ -1,17 +1,5 @@
 <template>
   <div class="login">
-    <!-- <div
-      v-if="loggingIn"
-      class="container-loading"
-    >
-      <img
-        src="/loading.gif"
-        alt="Loading Icon"
-      >
-    </div>
-    <p v-if="loginError">
-      {{ loginError }}
-    </p> -->
     <form @submit.prevent="loginSubmit">
       <input
         v-model="email"
@@ -42,7 +30,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   data() {
@@ -62,10 +50,21 @@ export default {
       'otherError',
     ]),
   },
+  created() {
+    this.changeTitle();
+  },
   methods: {
     ...mapActions('auth', [
       'login',
     ]),
+    ...mapMutations('title', [
+      'setTitle',
+      'setSubtitle',
+    ]),
+    changeTitle() {
+      this.setTitle('Prihlásenie');
+      this.setSubtitle('Používateľ');
+    },
     loginSubmit() {
       this.login({
         email: this.email,

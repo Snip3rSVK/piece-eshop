@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
-import fakeApi from '@/fakeApi/fakeApi';
 
 // shape: [{ id, quantity }]
 const state = {
@@ -28,12 +27,14 @@ const getters = {
 };
 
 const actions = {
+  // eslint-disable-next-line no-unused-vars
   checkout({ commit, state }, products) {
+    // eslint-disable-next-line no-unused-vars
     const savedCartItems = [...state.items];
     commit('setCheckoutStatus', null);
     // empty cart
     commit('setCartItems', { items: [] });
-    fakeApi.buyProducts(
+    /* fakeApi.buyProducts(
       products,
       () => commit('setCheckoutStatus', 'successful'),
       () => {
@@ -41,12 +42,15 @@ const actions = {
         // rollback to the cart saved before sending the request
         commit('setCartItems', { items: savedCartItems });
       },
-    );
+    ); */
+
+    commit('setCheckoutStatus', 'successful');
+    // commit('setCartItems', { items: savedCartItems });
   },
 
   addProductToCart({ state, commit }, product) {
     commit('setCheckoutStatus', null);
-    if (product.inventory > 0) {
+    if (product.stock > 0) {
       const cartItem = state.items.find(item => item.id === product.id);
       if (!cartItem) {
         commit('pushProductToCart', { id: product.id });
@@ -55,7 +59,7 @@ const actions = {
         commit('incrementItemQuantity', cartItem);
       }
       // remove 1 item from stock
-      commit('products/decrementProductInventory', { id: product.id }, { root: true });
+      commit('products/decrementProductStock', { id: product.id }, { root: true });
     }
   },
 };

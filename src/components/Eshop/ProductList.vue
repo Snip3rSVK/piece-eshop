@@ -71,6 +71,9 @@ export default {
         else if (this.category === 'praline') {
           translatedCategory = 'Pralinky';
         }
+        else if (this.category === 'praline_set') {
+          translatedCategory = 'Pralinky - set';
+        }
 
         this.setTitle(translatedCategory || this.category);
         this.setSubtitle('Kategória');

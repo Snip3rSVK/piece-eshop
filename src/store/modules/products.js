@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
-import fakeApi from '@/fakeApi/fakeApi';
+import ProductService from '@/services/product/product';
 
 // initial state
 const state = {
@@ -19,10 +19,36 @@ const getters = {
 
 // actions
 const actions = {
-  getAllProducts({ commit }) {
-    fakeApi.getProducts((products) => {
-      commit('setProducts', products);
+  async getAllProducts({ commit }) {
+    const products = await ProductService.getAllProducts();
+
+    products.forEach((product) => {
+      if (product.id) {
+        product.id = Number(product.id);
+      }
+      if (product.stock) {
+        product.stock = Number(product.stock);
+      }
+      if (product.price) {
+        product.price = Number(product.price);
+      }
     });
+
+    commit('setProducts', products);
+  },
+
+  setProductById({ state, commit }, product, id) {
+    let indexOfProduct = -1;
+    for (let i = 0; i < state.all; ++i) {
+      if (state.all[i].id === id) {
+        indexOfProduct = i;
+        break;
+      }
+    }
+
+    if (indexOfProduct >= 0) {
+      commit('setProductByIndex', product, indexOfProduct);
+    }
   },
 };
 
@@ -32,9 +58,13 @@ const mutations = {
     state.all = products;
   },
 
-  decrementProductInventory(state, { id }) {
+  setProductByIndex(state, product, index) {
+    state.all[index] = product;
+  },
+
+  decrementProductStock(state, { id }) {
     const product = state.all.find(product => product.id === id);
-    product.inventory--;
+    product.stock--;
   },
 };
 
