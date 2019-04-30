@@ -42,7 +42,7 @@ li {
   border-radius: 10px;
   padding-top: 171.428571429%;
   width: 100%;
-  background-image: radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505) !important;
+  background-image: $dark-gradient !important;
 }
 
 .product-list-item-title {

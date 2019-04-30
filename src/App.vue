@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">
     <router-view />
@@ -13,9 +14,11 @@ body {
   overflow-x: hidden;
   font-family: 'Raleway', sans-serif;
   color: $dark-brown;
+  font-size: 1rem;
 }
 
 [v-cloak] {
   display: none !important;
 }
+
 </style>
