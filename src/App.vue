@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 
-#admin-products-table, #admin-orderss-table {
+#admin-products-table, #admin-orders-table {
   font-size: 0.875rem;
 }
 

@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
+import Vue from 'vue';
 import ProductService from '@/services/product/product';
 
 // initial state
@@ -37,22 +38,26 @@ const actions = {
     commit('setProducts', products);
   },
 
-  setProductById({ state, commit }, { product, id }) {
+  async setProductById({ state, commit }, { product, id }) {
+    const response = await ProductService.updateProduct(product);
+
     let indexOfProduct = -1;
 
-    for (let i = 0; i < state.all.length; ++i) {
-      if (state.all[i].id === id) {
-        indexOfProduct = i;
-        break;
+    if (response) {
+      for (let i = 0; i < state.all.length; ++i) {
+        if (state.all[i].id === id) {
+          indexOfProduct = i;
+          break;
+        }
       }
-    }
 
-    if (indexOfProduct >= 0) {
-      const payload = {
-        index: indexOfProduct,
-        product,
-      };
-      commit('setProductByIndex', payload);
+      if (indexOfProduct >= 0) {
+        const payload = {
+          index: indexOfProduct,
+          product,
+        };
+        commit('setProductByIndex', payload);
+      }
     }
   },
 };
@@ -64,7 +69,8 @@ const mutations = {
   },
 
   setProductByIndex(state, { product, index }) {
-    state.all[index] = product;
+    // state.all[index] = product; <-- do not use because it will not be reactive
+    Vue.set(state.all, index, product);
   },
 
   decrementProductStock(state, { id }) {

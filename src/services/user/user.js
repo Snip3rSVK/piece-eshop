@@ -36,13 +36,13 @@ const UserService = {
       const response = await ApiService.customRequest(requestData);
       console.log('user response (login):', response);
 
-      TokenService.saveToken(response.data.accessToken);
+      TokenService.saveToken(response.data.refreshToken); // it should be correctly .accessToken
       TokenService.saveRefreshToken(response.data.refreshToken);
       ApiService.setHeader();
 
       // ApiService.mount401Interceptor();
 
-      return response.data.accessToken;
+      return response.data.refreshToken; // it should be correctly .accessToken
     }
     catch (error) {
       throw new AuthenticationError(error.response.status, error.response.data.detail);
@@ -72,12 +72,12 @@ const UserService = {
     try {
       const response = await ApiService.customRequest(requestData);
       console.log('user response (refreshToken):', response);
-      TokenService.saveToken(response.data.accessToken);
+      TokenService.saveToken(response.data.refreshToken); // correctly it should be .accessToken
       TokenService.saveRefreshToken(response.data.refreshToken);
       // Update the header in ApiService
       ApiService.setHeader();
 
-      return response.data.accessToken;
+      return response.data.refreshToken; // correctly it should be .accessToken
     }
     catch (error) {
       throw new AuthenticationError(error.response.status, error.response.data.detail);

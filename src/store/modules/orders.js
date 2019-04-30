@@ -1,10 +1,28 @@
-const state = {};
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-shadow */
+import OrderService from '@/services/order/order';
 
-const getters = {};
+const state = {
+  all: [],
+};
 
-const actions = {};
+const getters = {
+  getOrders: state => state.all,
+};
 
-const mutations = {};
+const actions = {
+  async getAllOrders({ commit }) {
+    const orders = await OrderService.getAllOrders();
+
+    commit('setOrders', orders);
+  },
+};
+
+const mutations = {
+  setOrders(state, orders) {
+    state.all = orders;
+  },
+};
 
 export default {
   namespaced: true,
