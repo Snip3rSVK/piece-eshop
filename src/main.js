@@ -1,5 +1,11 @@
 import Vue from 'vue';
-import './plugins/vuetify'
+import Pagination from 'bootstrap-vue/es/components/pagination';
+import Table from 'bootstrap-vue/es/components/table';
+import FormInput from 'bootstrap-vue/es/components/form-input';
+import FormGroup from 'bootstrap-vue/es/components/form-group';
+import FormSelect from 'bootstrap-vue/es/components/form-select';
+import Form from 'bootstrap-vue/es/components/form';
+import Button from 'bootstrap-vue/es/components/button';
 import App from './App.vue';
 import router from './router';
 import store from './store/main';
@@ -15,6 +21,14 @@ if (TokenService.getToken()) {
 }
 
 Vue.config.productionTip = false;
+
+Vue.use(Pagination);
+Vue.use(Table);
+Vue.use(FormInput);
+Vue.use(FormGroup);
+Vue.use(FormSelect);
+Vue.use(Form);
+Vue.use(Button);
 
 Vue.filter('shorten', (value, maxChar = 14) => {
   if (!value) {

@@ -37,9 +37,10 @@ const actions = {
     commit('setProducts', products);
   },
 
-  setProductById({ state, commit }, product, id) {
+  setProductById({ state, commit }, { product, id }) {
     let indexOfProduct = -1;
-    for (let i = 0; i < state.all; ++i) {
+
+    for (let i = 0; i < state.all.length; ++i) {
       if (state.all[i].id === id) {
         indexOfProduct = i;
         break;
@@ -47,7 +48,11 @@ const actions = {
     }
 
     if (indexOfProduct >= 0) {
-      commit('setProductByIndex', product, indexOfProduct);
+      const payload = {
+        index: indexOfProduct,
+        product,
+      };
+      commit('setProductByIndex', payload);
     }
   },
 };
@@ -58,7 +63,7 @@ const mutations = {
     state.all = products;
   },
 
-  setProductByIndex(state, product, index) {
+  setProductByIndex(state, { product, index }) {
     state.all[index] = product;
   },
 

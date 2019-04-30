@@ -48,7 +48,7 @@ export default {
         this.logout();
       }
       else {
-        this.$router.push('');
+        this.$router.push('/login');
       }
     },
   },

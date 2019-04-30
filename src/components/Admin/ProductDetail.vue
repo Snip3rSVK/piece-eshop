@@ -1,60 +1,78 @@
 <template>
-  <div
+  <b-form
     v-if="product && originalProduct"
     class="product-detail"
+    @submit.prevent="save()"
   >
+    <div class="product-detail-item">
+      <b-form-group
+        id="fieldset-1"
+        label="Názov"
+        label-for="input-1"
+        :invalid-feedback="stateTitleInvalid"
+        :valid-feedback="validMsg"
+        :state="stateTitle"
+      >
+        <b-form-input
+          id="input-1"
+          v-model="originalProduct.title"
+          :state="stateTitle"
+          trim
+          autocomplete="off"
+        />
+      </b-form-group>
+    </div>
+
+    <div class="product-detail-item">
+      <b-form-group
+        id="fieldset-2"
+        label="Adresa obrázka"
+        label-for="input-2"
+        :invalid-feedback="stateUrlInvalid"
+        :valid-feedback="validMsg"
+        :state="stateUrl"
+      >
+        <b-form-input
+          id="input-2"
+          v-model="originalProduct.imageUrl"
+          :state="stateUrl"
+          trim
+          autocomplete="off"
+        />
+      </b-form-group>
+    </div>
+
+    <div class="product-detail-item">
+      <b-form-group
+        id="fieldset-3"
+        label="Kategória"
+        label-for="input-3"
+        :invalid-feedback="stateCategoryInvalid"
+        :valid-feedback="validMsg"
+        :state="stateCategory"
+      >
+        <b-form-select
+          v-model="originalProduct.category"
+          :options="categories"
+          :state="true"
+        />
+      </b-form-group>
+    </div>
     <div
-      v-for="(value, key) in product"
+      v-for="(value, key) in originalProduct"
       :key="key"
       class="product-detail-item"
     >
-      <div class="product-detail-item-title">
-        {{ key }}
-      </div>
-      <textarea
-        v-if="key === 'description'"
-        v-model.lazy="product[key]"
-        type="text"
-      />
-      <input
-        v-else-if="typeof value === 'string'"
-        v-model.lazy="product[key]"
-        type="text"
-      >
-      <input
-        v-else-if="typeof value === 'number'"
-        v-model.lazy="product[key]"
-        type="number"
-      >
-      <input
-        v-else-if="typeof value === 'boolean'"
-        v-model.lazy="product[key]"
-        type="radio"
-      >
-      <div
-        v-else-if="key === 'nutritionInfo'"
-        class="nutrition-info"
-      >
-        <div
-          v-for="(infoValue, infoKey) in product.nutritionInfo"
-          :key="infoKey"
-        >
-          <strong>{{ infoKey }}:</strong><br>
-          <input
-            type="text"
-          >
-        </div>
-      </div>
-      <input
-        v-else
-        v-model.lazy="product[key]"
-        type="text"
-      >
+      {{ key }} : {{ value }}
     </div>
-    <button @click="save()">
+    <b-button
+      type="submit"
+      variant="primary"
+      :disabled="!wholeFormValid"
+    >
       Uložiť
-    </button>
-  </div>
+    </b-button>
+  </b-form>
 </template>
 
 <script>
@@ -73,6 +91,21 @@ export default {
     return {
       originalProduct: null,
       pushed: false,
+      validMsg: 'Ok.',
+      categories: [
+        {
+          value: 'chocolate',
+          text: 'Čokolády',
+        },
+        {
+          value: 'praline',
+          text: 'Pralinky',
+        },
+        {
+          value: 'praline_set',
+          text: 'Pralinky - set',
+        },
+      ],
     };
   },
   computed: {
@@ -82,9 +115,57 @@ export default {
     product() {
       return this.getProductById(Number(this.id));
     },
+    stateTitle() {
+      const titleLength = this.originalProduct.title.length;
+      if (titleLength >= 2 && titleLength <= 30) {
+        return true;
+      }
+
+      return false;
+    },
+    stateTitleInvalid() {
+      if (this.originalProduct.title.length < 2) {
+        return 'Názov musí obsahovať aspoň 2 znaky.';
+      }
+
+      return 'Názov musí obsahovať menej ako 31 znakov.';
+    },
+    stateUrl() {
+      const url = this.originalProduct.imageUrl || '';
+      const regexes = [/\.png$/i, /\.jpg$/i, /\.svg$/i, /\.jpeg$/i, /img\/products\/\d+\/$/i];
+
+      for (let i = 0; i < regexes.length; ++i) {
+        if (regexes[i].test(url)) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    stateUrlInvalid() {
+      return 'Povolené sú len prípony obrázkov.';
+    },
+    stateCategory() {
+      return Boolean(this.originalProduct.category.length);
+    },
+    stateCategoryInvalid() {
+      return 'Vyber si z jednej možnosti';
+    },
+    wholeFormValid() {
+      if (
+        this.stateTitle
+        && this.stateUrl
+        && this.stateCategory
+      ) {
+        return true;
+      }
+
+      return false;
+    },
   },
   watch: {
     product() {
+      console.log('product changed');
       this.changeTitle();
       this.deepCloneProduct();
     },
@@ -92,11 +173,6 @@ export default {
   created() {
     this.changeTitle();
     this.deepCloneProduct();
-  },
-  beforeDestroy() {
-    if (this.id >= 0 && this.originalProduct) {
-      this.setProductById(this.originalProduct, this.id);
-    }
   },
   methods: {
     ...mapMutations('title', [
@@ -123,8 +199,14 @@ export default {
       }
     },
     save() {
-      this.originalProduct = this.product;
-      // API VOLANIE ALE PREDTYM ZMENIT CISLA NA STRINGY!!!!
+      if (this.id >= 0 && this.originalProduct) {
+        const payload = {
+          id: Number(this.id),
+          product: this.originalProduct,
+        };
+
+        this.setProductById(payload);
+      }
     },
   },
 };
@@ -139,35 +221,11 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-.product-detail-item {
-
-}
-
 .product-detail-item-title {
   display: flex;
   justify-content: center;
   margin-bottom: 0.5rem;
   font-size: 0.9375rem;
-}
-
-input {
-  border: none;
-  background: none;
-  color: #fff;
-  padding: 10px 20px;
-  outline: 0;
-}
-
-input, textarea, .nutrition-info {
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 5px;
-  background: $dark-gradient;
-  color: #fff;
-}
-
-input:focus, textarea:focus, .nutrition-info:focus {
-
 }
 
 </style>

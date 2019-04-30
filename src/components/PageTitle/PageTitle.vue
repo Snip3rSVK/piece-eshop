@@ -44,6 +44,7 @@ h1, h2 {
 .page-title-subtitle {
   text-transform: uppercase;
   font-size: calc(10px + 0.25vw);
+  font-weight: bold;
 }
 
 .page-title-title {
