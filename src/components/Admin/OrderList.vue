@@ -88,6 +88,9 @@ export default {
       this.setTitle('Objednávky');
       this.setSubtitle('Administrácia');
     },
+    redirectToDetail(item) {
+      this.$router.push(`/admin/order/${item.id}`);
+    },
   },
 };
 </script>

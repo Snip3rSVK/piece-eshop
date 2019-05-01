@@ -6,12 +6,13 @@
     <h2 class="shopping-cart-title">
       Košík
     </h2>
-    <button
+    <b-button
       class="shopping-cart-close-button"
+      variant="light"
       @click="hideCart()"
     >
       Close
-    </button>
+    </b-button>
     <p v-show="!products.length">
       <i>Pridajte pordukty do košíka</i>
     </p>
@@ -27,12 +28,13 @@
     <!-- <p>Total: {{ total | currency }}</p> -->
     <p>Spolu: {{ total }}</p>
     <p>
-      <button
+      <b-button
         :disabled="!products.length"
+        variant="light"
         @click="checkout(products)"
       >
         Objednať
-      </button>
+      </b-button>
     </p>
     <p v-show="checkoutStatus">
       Objednávka úspešná: {{ checkoutStatus }}.

@@ -1,11 +1,11 @@
 <template>
   <div v-if="product">
     <div
-      :style="'background-image: url()'"
+      :style="`background-image: url('http://bensvk.ddns.net/Piece/${ product.imageUrl }/bg.jpg'), radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505)`"
       class="product-detail-img"
     />
     <div
-      :style="'background-image: url()'"
+      :style="`background-image: url('http://bensvk.ddns.net/Piece/${ product.imageUrl }/no-bg.jpg'), radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505)`"
       class="product-detail-img"
     />
     <div class="product-detail-content">
@@ -33,12 +33,13 @@
           <strong>{{ key }}:</strong> {{ value }}
         </div>
       </div>
-      <button
+      <b-button
         :disabled="!product.stock"
+        variant="primary"
         @click="addProductToCart(product)"
       >
         Pridať do košíka
-      </button>
+      </b-button>
     </div>
   </div>
 </template>
@@ -98,7 +99,9 @@ export default {
   padding-top: 120%;
   width: 70%;
   height: 0;
-  background-image: radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505) !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .product-detail-img:first-of-type {

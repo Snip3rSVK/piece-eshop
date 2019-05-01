@@ -23,6 +23,31 @@ const OrderService = {
       throw new Error(error);
     }
   },
+
+  async updateOrderStatus(id, status) {
+    const requestData = {
+      method: 'post',
+      url: '/api/update-order-status.php/',
+      data: {
+        id,
+        status,
+      },
+      /* auth: {
+        username: process.env.VUE_APP_CLIENT_ID,
+        password: process.env.VUE_APP_CLIENT_SECRET
+      } */
+    };
+
+    try {
+      const response = await ApiService.customRequest(requestData);
+      console.log('updateOrderStatus response (order):', response);
+
+      return response;
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+  },
 };
 
 export default OrderService;

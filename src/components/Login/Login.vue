@@ -1,22 +1,23 @@
 <template>
   <div class="login">
-    <form @submit.prevent="loginSubmit">
-      <input
+    <b-form @submit.prevent="loginSubmit">
+      <b-form-input
         v-model="email"
         type="email"
         placeholder="Email"
-      >
-      <input
+      />
+      <b-form-input
         v-model="password"
         type="password"
         placeholder="Heslo"
-      >
-      <button
+      />
+      <b-button
         type="submit"
+        variant="primary"
       >
         Prihlásiť sa
-      </button>
-    </form>
+      </b-button>
+    </b-form>
     <div>
       authenticating: {{ authenticating }}
     </div>

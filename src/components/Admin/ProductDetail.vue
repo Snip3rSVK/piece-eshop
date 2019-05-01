@@ -220,12 +220,4 @@ export default {
   grid-gap: 50px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
-
-.product-detail-item-title {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 0.5rem;
-  font-size: 0.9375rem;
-}
-
 </style>

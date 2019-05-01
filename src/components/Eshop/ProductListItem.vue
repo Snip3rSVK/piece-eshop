@@ -5,7 +5,7 @@
     tag="li"
   >
     <div
-      :style="`background-image: url(${ itemImg })`"
+      :style="`background-image: url('http://bensvk.ddns.net/Piece/${ itemImg }/bg.jpg'), radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505)`"
       class="product-list-item-img"
     />
     <span class="product-list-item-title">{{ itemTitle }}</span>
@@ -42,7 +42,9 @@ li {
   border-radius: 10px;
   padding-top: 171.428571429%;
   width: 100%;
-  background-image: $dark-gradient !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .product-list-item-title {

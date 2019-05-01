@@ -1,5 +1,4 @@
 import ApiService from '@/services/api/api';
-import TokenService from '@/services/token/token';
 
 const ProductService = {
   async getAllProducts() {
