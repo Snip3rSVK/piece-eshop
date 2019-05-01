@@ -22,16 +22,16 @@
         :key="product.id"
       >
         <!-- {{ product.title }} - {{ product.price | currency }} x {{ product.quantity }} -->
-        {{ product.title }} - {{ product.price }} x {{ product.quantity }}
+        {{ product.title }} - {{ product.price }} € x {{ product.quantity }}
       </li>
     </ul>
     <!-- <p>Total: {{ total | currency }}</p> -->
-    <p>Spolu: {{ total }}</p>
+    <p>Spolu: {{ total }} €</p>
     <p>
       <b-button
         :disabled="!products.length"
         variant="light"
-        @click="checkout(products)"
+        @click="goToOrder"
       >
         Objednať
       </b-button>
@@ -63,6 +63,10 @@ export default {
     ...mapMutations('shoppingCart', [
       'hideCart',
     ]),
+    goToOrder() {
+      this.$router.push('/eshop/order');
+      this.hideCart();
+    },
   },
 };
 </script>

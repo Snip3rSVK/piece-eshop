@@ -9,7 +9,7 @@
     <div class="sidebar-menu-content">
       <img
         class="sidebar-menu-logo"
-        src="@/assets/img/logo.svg"
+        src="@/assets/img/logo-black.svg"
         alt="PIECE logo"
         @click="goToHomePage"
       >

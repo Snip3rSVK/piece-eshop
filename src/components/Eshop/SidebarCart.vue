@@ -73,7 +73,7 @@ a:hover {
   box-sizing: border-box;
   right: 0;
   top: 0;
-  padding-top: 4.375rem;
+  padding-top: 3.1875rem;
   padding-left: 36px;
   display: flex;
   justify-content: flex-start;

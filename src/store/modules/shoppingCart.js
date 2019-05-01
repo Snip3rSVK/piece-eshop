@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
+import OrderService from '@/services/order/order';
 
 // shape: [{ id, quantity }]
 const state = {
@@ -20,6 +21,11 @@ const getters = {
 
   cartNumberOfProducts: state => state.items.length,
 
+  cartProductsOrderReady: state => state.items.map(({ id, quantity }) => ({
+    id,
+    count: quantity,
+  })),
+
   // eslint-disable-next-line max-len
   cartTotalPrice: (state, getters) => getters.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0),
 
@@ -28,24 +34,19 @@ const getters = {
 
 const actions = {
   // eslint-disable-next-line no-unused-vars
-  checkout({ commit, state }, products) {
+  async checkout({ commit, state }, orderPayload) {
     // eslint-disable-next-line no-unused-vars
-    const savedCartItems = [...state.items];
-    commit('setCheckoutStatus', null);
-    // empty cart
-    commit('setCartItems', { items: [] });
-    /* fakeApi.buyProducts(
-      products,
-      () => commit('setCheckoutStatus', 'successful'),
-      () => {
-        commit('setCheckoutStatus', 'failed');
-        // rollback to the cart saved before sending the request
-        commit('setCartItems', { items: savedCartItems });
-      },
-    ); */
+    const response = await OrderService.sendOrder(orderPayload);
 
-    commit('setCheckoutStatus', 'successful');
-    // commit('setCartItems', { items: savedCartItems });
+    commit('setCheckoutStatus', null);
+
+    if (response) {
+      commit('setCartItems', { items: [] });
+      commit('setCheckoutStatus', 'successful');
+    }
+    else {
+      commit('setCheckoutStatus', 'failed');
+    }
   },
 
   addProductToCart({ state, commit }, product) {

@@ -8,6 +8,7 @@ import AdminOrderList from './components/Admin/OrderList.vue';
 import AdminProductList from './components/Admin/ProductList.vue';
 import AdminOrderDetail from './components/Admin/OrderDetail.vue';
 import AdminProductDetail from './components/Admin/ProductDetail.vue';
+import Order from './components/Order/Order.vue';
 import TokenService from './services/token/token';
 
 Vue.use(Router);
@@ -37,6 +38,11 @@ const router = new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "eshop" */ './views/Eshop/Eshop.vue'),
       children: [
+        {
+          path: 'order',
+          name: 'order',
+          component: Order,
+        },
         {
           path: 'product/:id',
           name: 'product',

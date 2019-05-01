@@ -7,6 +7,7 @@ import FormSelect from 'bootstrap-vue/es/components/form-select';
 import Form from 'bootstrap-vue/es/components/form';
 import Button from 'bootstrap-vue/es/components/button';
 import FormCheckbox from 'bootstrap-vue/es/components/form-checkbox';
+import FormTextarea from 'bootstrap-vue/es/components/form-textarea';
 import App from './App.vue';
 import router from './router';
 import store from './store/main';
@@ -31,6 +32,7 @@ Vue.use(FormSelect);
 Vue.use(Form);
 Vue.use(Button);
 Vue.use(FormCheckbox);
+Vue.use(FormTextarea);
 
 Vue.filter('shorten', (value, maxChar = 14) => {
   if (!value) {

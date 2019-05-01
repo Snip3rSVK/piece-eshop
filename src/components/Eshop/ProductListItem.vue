@@ -9,7 +9,7 @@
       class="product-list-item-img"
     />
     <span class="product-list-item-title">{{ itemTitle }}</span>
-    <span class="product-list-item-price">{{ itemPrice }}</span>
+    <span class="product-list-item-price">{{ itemPrice }} €</span>
   </router-link>
 </template>
 

@@ -48,6 +48,28 @@ const OrderService = {
       throw new Error(error);
     }
   },
+
+  async sendOrder(orderPayload) {
+    const requestData = {
+      method: 'post',
+      url: '/api/post-order.php/',
+      data: orderPayload,
+      /* auth: {
+        username: process.env.VUE_APP_CLIENT_ID,
+        password: process.env.VUE_APP_CLIENT_SECRET
+      } */
+    };
+
+    try {
+      const response = await ApiService.customRequest(requestData);
+      console.log('sendOrder response (order):', response);
+
+      return response;
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+  },
 };
 
 export default OrderService;
