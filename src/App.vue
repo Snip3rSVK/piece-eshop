@@ -19,6 +19,14 @@
 .btn-light {
   background: $golden-gradient;
   border: 0;
+  font-weight: bold;
+  color: $dark-brown;
+  transition: opacity 0.25s;
+}
+
+.btn-light:hover {
+  opacity: 0.8;
+  color: $dark-brown;
 }
 
 .btn-primary {

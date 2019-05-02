@@ -110,7 +110,7 @@ const mutations = {
     state.all.splice(index, 1);
   },
 
-  decrementProductStock(state, id) {
+  decrementProductStock(state, { id }) {
     const product = state.all.find(product => product.id === id);
     product.stock--;
   },

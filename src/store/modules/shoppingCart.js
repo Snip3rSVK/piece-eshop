@@ -13,6 +13,7 @@ const getters = {
   cartProducts: (state, getters, rootState) => state.items.map(({ id, quantity }) => {
     const product = rootState.products.all.find(product => product.id === id);
     return {
+      imageUrl: product.imageUrl,
       title: product.title,
       price: product.price,
       quantity,
@@ -53,6 +54,7 @@ const actions = {
     commit('setCheckoutStatus', null);
     if (product.stock > 0) {
       const cartItem = state.items.find(item => item.id === product.id);
+      
       if (!cartItem) {
         commit('pushProductToCart', { id: product.id });
       }

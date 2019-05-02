@@ -81,6 +81,7 @@ export default {
   },
   watch: {
     product() {
+      console.log('changed Product', this.product);
       this.changeTitle();
     },
   },
