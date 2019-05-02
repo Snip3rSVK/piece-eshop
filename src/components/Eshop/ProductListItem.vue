@@ -5,7 +5,7 @@
     tag="li"
   >
     <div
-      :style="`background-image: url('http://bensvk.ddns.net/Piece/${ itemImg }/bg.jpg'), radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505)`"
+      :style="`background-image: url('http://bensvk.ddns.net/Piece/${ itemImg }/bg.jpg'), url('${ itemImg }'), radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505)`"
       class="product-list-item-img"
     />
     <span class="product-list-item-title">{{ itemTitle }}</span>

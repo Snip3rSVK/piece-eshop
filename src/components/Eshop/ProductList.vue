@@ -39,10 +39,10 @@ export default {
     ]),
     products() {
       if (this.category) {
-        return this.getProductsByCategory(this.category);
+        return this.getProductsByCategory(this.category).filter(product => product.visible === true);
       }
 
-      return this.getProducts;
+      return this.getProducts.filter(product => product.visible === true);
     },
   },
   watch: {

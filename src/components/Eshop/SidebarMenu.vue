@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 <template>
   <aside class="sidebar-menu">
     <!-- <img
@@ -9,7 +8,7 @@
     <div class="sidebar-menu-content">
       <img
         class="sidebar-menu-logo"
-        src="@/assets/img/logo-black.svg"
+        src="@/assets/img/logo.svg"
         alt="PIECE logo"
         @click="goToHomePage"
       >

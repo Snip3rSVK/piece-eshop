@@ -8,6 +8,8 @@ import Form from 'bootstrap-vue/es/components/form';
 import Button from 'bootstrap-vue/es/components/button';
 import FormCheckbox from 'bootstrap-vue/es/components/form-checkbox';
 import FormTextarea from 'bootstrap-vue/es/components/form-textarea';
+import ListGroup from 'bootstrap-vue/es/components/list-group';
+import Tabs from 'bootstrap-vue/es/components/tabs';
 import App from './App.vue';
 import router from './router';
 import store from './store/main';
@@ -33,6 +35,8 @@ Vue.use(Form);
 Vue.use(Button);
 Vue.use(FormCheckbox);
 Vue.use(FormTextarea);
+Vue.use(ListGroup);
+Vue.use(Tabs);
 
 Vue.filter('shorten', (value, maxChar = 14) => {
   if (!value) {

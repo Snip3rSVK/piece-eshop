@@ -12,6 +12,28 @@
 @import '~normalize.css';
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Raleway:400,700,900&subset=latin-ext');
 
+.nav-link {
+  color: $dark-brown !important;
+}
+
+.btn-light {
+  background: $golden-gradient;
+  border: 0;
+}
+
+.btn-primary {
+  transition: opacity 0.25s;
+}
+
+.btn-primary:hover {
+  background: $dark-brown;
+  opacity: 0.9;
+}
+
+.disabled, .disabled:hover {
+  opacity: 0.65;
+}
+
 .page-item.active .page-link {
   background: $dark-gradient;
   border-color: $dark-brown;
@@ -35,7 +57,6 @@ body {
   overflow-x: hidden;
   font-family: 'Raleway', sans-serif;
   color: $dark-brown;
-  font-size: 1rem;
   line-height: initial;
 }
 

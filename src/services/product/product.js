@@ -24,11 +24,6 @@ const ProductService = {
   },
 
   async updateProduct(product) {
-    // const config = {
-    //   headers: {
-    //     'Refresh-Token': TokenService.getToken(),
-    //   },
-    // };
     const requestData = {
       method: 'post',
       url: '/api/update-product.php/',
@@ -42,6 +37,52 @@ const ProductService = {
     try {
       const response = await ApiService.customRequest(requestData);
       console.log('updateProduct response (product):', response);
+
+      return response;
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+  },
+
+  async createProduct(product) {
+    const requestData = {
+      method: 'post',
+      url: '/api/create-product.php/',
+      data: product,
+      /* auth: {
+        username: process.env.VUE_APP_CLIENT_ID,
+        password: process.env.VUE_APP_CLIENT_SECRET
+      } */
+    };
+
+    try {
+      const response = await ApiService.customRequest(requestData);
+      console.log('addProduct response (product):', response);
+
+      return response;
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+  },
+
+  async deleteProduct(id) {
+    const requestData = {
+      method: 'post',
+      url: '/api/delete-product.php/',
+      data: {
+        id,
+      },
+      /* auth: {
+        username: process.env.VUE_APP_CLIENT_ID,
+        password: process.env.VUE_APP_CLIENT_SECRET
+      } */
+    };
+
+    try {
+      const response = await ApiService.customRequest(requestData);
+      console.log('deleteProduct response (product):', response);
 
       return response;
     }

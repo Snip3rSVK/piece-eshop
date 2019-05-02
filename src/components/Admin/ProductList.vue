@@ -1,11 +1,19 @@
 <template>
   <div v-if="products.length">
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="admin-products-table"
-    />
+    <div class="pagination-plus-btn">
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="admin-products-table"
+      />
+      <b-button
+        to="/admin/product/-1"
+        variant="primary"
+      >
+        Pridať produkt
+      </b-button>
+    </div>
     <b-table
       id="admin-products-table"
       striped
@@ -93,5 +101,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.pagination-plus-btn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 </style>

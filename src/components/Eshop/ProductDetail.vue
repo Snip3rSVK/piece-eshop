@@ -1,7 +1,7 @@
 <template>
   <div v-if="product">
     <div
-      :style="`background-image: url('http://bensvk.ddns.net/Piece/${ product.imageUrl }/bg.jpg'), radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505)`"
+      :style="`background-image: url('http://bensvk.ddns.net/Piece/${ product.imageUrl }/bg.jpg'), url('${ product.imageUrl }'), radial-gradient(circle, #260d0d, #220b0b, #1e0909, #190707, #140505)`"
       class="product-detail-img"
     />
     <div
@@ -9,30 +9,48 @@
       class="product-detail-img"
     />
     <div class="product-detail-content">
-      <div class="product-detail-content-price">
-        {{ product.price }}
+      <div class="product-detail-content-price mb-4">
+        {{ product.price }} €
       </div>
-      <div>K dispozícii: {{ product.stock }}</div>
-      <div>Kategória: {{ product.category }}</div>
-      <div>Popis: {{ product.description | shorten(100) }}</div>
-      <div>
-        <h2>Alergény</h2>
-        <ul>
-          <!-- eslint-disable-next-line vue/require-v-for-key -->
-          <li v-for="allergen in product.allergens">
-            {{ allergen }}
-          </li>
-        </ul>
+      <div>Skladom: {{ product.stock }}</div>
+      <!-- <div>Kategória: {{ product.category }}</div> -->
+      <div class="mt-4 mb-4">
+        {{ product.description | shorten(160) }}
       </div>
-      <div>
-        <h2>Nutričné hodnoty</h2>
-        <div
-          v-for="(value, key) in product.nutritionInfo"
-          :key="key"
+      <b-tabs
+        active-nav-item-class="font-weight-bold"
+        class="mb-4"
+      >
+        <b-tab
+          title="Alergény"
+          active
+          class="product-tab"
         >
-          <strong>{{ key }}:</strong> {{ value }}
-        </div>
-      </div>
+          <b-list-group>
+            <b-list-group-item
+              v-for="(allergen, index) in product.allergens"
+              :key="index"
+              class="pt-2 pb-2 pl-3 product-list-group-item"
+            >
+              {{ allergen }}
+            </b-list-group-item>
+          </b-list-group>
+        </b-tab>
+        <b-tab
+          title="Vitamíny"
+          class="product-tab"
+        >
+          <b-list-group>
+            <b-list-group-item
+              v-for="(vitamin, index) in product.vitamins"
+              :key="index"
+              class="pt-2 pb-2 pl-3 product-list-group-item"
+            >
+              {{ vitamin }}
+            </b-list-group-item>
+          </b-list-group>
+        </b-tab>
+      </b-tabs>
       <b-button
         :disabled="!product.stock"
         variant="primary"
@@ -117,7 +135,20 @@ export default {
   top: 0;
   right: 0;
   display: block;
-  padding-top: 11rem;
+  padding-top: 12rem;
   padding-right: 40px;
+}
+
+.product-detail-content-price {
+  font-size: 1.25em;
+}
+
+.product-tab {
+  line-height: 1.4;
+  border-bottom: 0;
+}
+
+.nav-tabs {
+  border-bottom: 0;
 }
 </style>

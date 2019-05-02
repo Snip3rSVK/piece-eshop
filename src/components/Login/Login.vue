@@ -1,32 +1,44 @@
 <template>
-  <div class="login">
+  <div class="login-wrapper">
     <b-form @submit.prevent="loginSubmit">
-      <b-form-input
-        v-model="email"
-        type="email"
-        placeholder="Email"
-      />
-      <b-form-input
-        v-model="password"
-        type="password"
-        placeholder="Heslo"
-      />
+      <div class="login">
+        <b-form-group
+          id="login-email"
+          label="Email"
+          label-for="input-email"
+          :invalid-feedback="stateInvalid"
+          :state="stateLogin"
+        >
+          <b-form-input
+            id="input-email"
+            v-model="email"
+            type="email"
+            :state="stateLogin"
+          />
+        </b-form-group>
+        <b-form-group
+          id="login-password"
+          label="Heslo"
+          label-for="input-password"
+          :invalid-feedback="stateInvalid"
+          :state="stateLogin"
+        >
+          <b-form-input
+            id="input-password"
+            v-model="password"
+            type="password"
+            :state="stateLogin"
+          />
+        </b-form-group>
+      </div>
       <b-button
         type="submit"
         variant="primary"
+        class="login-button"
       >
         Prihlásiť sa
       </b-button>
     </b-form>
-    <div>
-      authenticating: {{ authenticating }}
-    </div>
-    <div>
-      authenticationError: {{ authenticationError }}
-    </div>
-    <div>
-      otherError: {{ Boolean(otherError) }}
-    </div>
   </div>
 </template>
 
@@ -50,6 +62,16 @@ export default {
       'authenticationError',
       'otherError',
     ]),
+    stateLogin() {
+      if (this.authenticationError) {
+        return false;
+      }
+
+      return null;
+    },
+    stateInvalid() {
+      return this.authenticationError;
+    },
   },
   created() {
     this.changeTitle();
@@ -77,5 +99,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.login {
+  display: block;
+  width: 100%;
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
 
+.login-button {
+  margin-top: 30px;
+}
 </style>

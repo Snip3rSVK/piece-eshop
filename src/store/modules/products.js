@@ -60,10 +60,42 @@ const actions = {
       }
     }
   },
+
+  async createProduct({ state, commit }, product) {
+    const response = await ProductService.createProduct(product);
+
+    if (response) {
+      product.id = Number(state.all[state.all.length - 1].id) + 1;
+      commit('pushProduct', product);
+    }
+  },
+
+  async deleteProduct({ state, commit }, id) {
+    const response = await ProductService.deleteProduct(id);
+
+    let indexOfProduct = -1;
+
+    if (response) {
+      for (let i = 0; i < state.all.length; ++i) {
+        if (state.all[i].id === Number(id)) {
+          indexOfProduct = i;
+          break;
+        }
+      }
+
+      if (indexOfProduct >= 0) {
+        commit('deleteProductByIndex', indexOfProduct);
+      }
+    }
+  },
 };
 
 // mutations
 const mutations = {
+  pushProduct(state, product) {
+    state.all.push(product);
+  },
+
   setProducts(state, products) {
     state.all = products;
   },
@@ -73,7 +105,12 @@ const mutations = {
     Vue.set(state.all, index, product);
   },
 
-  decrementProductStock(state, { id }) {
+  deleteProductByIndex(state, index) {
+    // state.all[index] = product; <-- do not use because it will not be reactive
+    state.all.splice(index, 1);
+  },
+
+  decrementProductStock(state, id) {
     const product = state.all.find(product => product.id === id);
     product.stock--;
   },

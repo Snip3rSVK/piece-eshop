@@ -1,121 +1,141 @@
 <template>
   <b-form
-    v-if="product && originalProduct"
+    v-if="(product && originalProduct) || (id === '-1' && originalProduct)"
     class="product-detail-wrapper"
     @submit.prevent="save()"
   >
     <div class="product-detail">
-    	<div class="product-detail-item">
-    	  <b-form-group
-    	    id="fieldset-1"
-    	    label="Názov"
-    	    label-for="input-1"
-    	    :invalid-feedback="stateTitleInvalid"
-    	    :valid-feedback="validMsg"
-    	    :state="stateTitle"
-    	  >
-    	    <b-form-input
-    	      id="input-1"
-    	      v-model="originalProduct.title"
-    	      :state="stateTitle"
-    	      trim
-    	      autocomplete="off"
-    	    />
-    	  </b-form-group>
-    	</div>
-    
-    	<div class="product-detail-item">
-    	  <b-form-group
-    	    id="fieldset-2"
-    	    label="Adresa obrázka"
-    	    label-for="input-2"
-    	    :invalid-feedback="stateUrlInvalid"
-    	    :valid-feedback="validMsg"
-    	    :state="stateUrl"
-    	  >
-    	    <b-form-input
-    	      id="input-2"
-    	      v-model="originalProduct.imageUrl"
-    	      :state="stateUrl"
-    	      trim
-    	      autocomplete="off"
-    	    />
-    	  </b-form-group>
-    	</div>
-    
-    	<div class="product-detail-item">
-    	  <b-form-group
-    	    id="fieldset-3"
-    	    label="Kategória"
-    	    label-for="input-3"
-    	    :invalid-feedback="stateCategoryInvalid"
-    	    :valid-feedback="validMsg"
-    	    :state="stateCategory"
-    	  >
-    	    <b-form-select
-    	      v-model="originalProduct.category"
-    	      :options="categories"
-    	      :state="true"
-    	    />
-    	  </b-form-group>
-    	</div>
-    
-    	<div class="product-detail-item">
-    	  <b-form-group
-    	    id="fieldset-4"
-    	    label="Cena"
-    	    label-for="input-4"
-    	    :invalid-feedback="statePriceInvalid"
-    	    :valid-feedback="validMsg"
-    	    :state="statePrice"
-    	  >
-    	    <b-form-input
-    	      id="input-4"
-    	      v-model="originalProduct.price"
-    	      :state="statePrice"
-    	      :formatter="formatterPrice"
-    	      type="number"
-    	      min="0"
-    	      max="100000"
-    	      step="0.01"
-    	      trim
-    	      autocomplete="off"
-    	      number
-    	      lazy-formatter
-    	    />
-    	  </b-form-group>
-    	</div>
-    
-    	<div class="product-detail-item">
-    	  <b-form-group
-    	    id="fieldset-4"
-    	    label="Na sklade"
-    	    label-for="input-4"
-    	    :invalid-feedback="stateStockInvalid"
-    	    :valid-feedback="validMsg"
-    	    :state="stateStock"
-    	  >
-    	    <b-form-input
-    	      id="input-4"
-    	      v-model="originalProduct.stock"
-    	      :state="stateStock"
-    	      :formatter="formatterStock"
-    	      type="number"
-    	      min="-100000"
-    	      max="100000"
-    	      step="1"
-    	      trim
-    	      autocomplete="off"
-    	      number
-    	      lazy-formatter
-    	    />
-    	  </b-form-group>
-    	</div>
+      <div class="product-detail-item">
+        <b-form-group
+          id="fieldset-1"
+          label="Názov"
+          label-for="input-1"
+          :invalid-feedback="stateTitleInvalid"
+          :valid-feedback="validMsg"
+          :state="stateTitle"
+        >
+          <b-form-input
+            id="input-1"
+            v-model="originalProduct.title"
+            :state="stateTitle"
+            trim
+            autocomplete="off"
+          />
+        </b-form-group>
+      </div>
+
+      <div class="product-detail-item">
+        <b-form-group
+          id="fieldset-2"
+          label="Adresa obrázka"
+          label-for="input-2"
+          :invalid-feedback="stateUrlInvalid"
+          :valid-feedback="validMsg"
+          :state="stateUrl"
+        >
+          <b-form-input
+            id="input-2"
+            v-model="originalProduct.imageUrl"
+            :state="stateUrl"
+            trim
+            autocomplete="off"
+          />
+        </b-form-group>
+      </div>
+
+      <div class="product-detail-item">
+        <b-form-group
+          id="fieldset-3"
+          label="Kategória"
+          label-for="input-3"
+          :invalid-feedback="stateCategoryInvalid"
+          :valid-feedback="validMsg"
+          :state="stateCategory"
+        >
+          <b-form-select
+            id="input-3"
+            v-model="originalProduct.category"
+            :options="categories"
+            :state="true"
+          />
+        </b-form-group>
+      </div>
+
+      <div class="product-detail-item">
+        <b-form-group
+          id="fieldset-4"
+          label="Cena"
+          label-for="input-4"
+          :invalid-feedback="statePriceInvalid"
+          :valid-feedback="validMsg"
+          :state="statePrice"
+        >
+          <b-form-input
+            id="input-4"
+            v-model="originalProduct.price"
+            :state="statePrice"
+            :formatter="formatterPrice"
+            type="number"
+            min="0"
+            max="100000"
+            step="0.01"
+            trim
+            autocomplete="off"
+            number
+            lazy-formatter
+          />
+        </b-form-group>
+      </div>
+
+      <div class="product-detail-item">
+        <b-form-group
+          id="fieldset-5"
+          label="Na sklade"
+          label-for="input-5"
+          :invalid-feedback="stateStockInvalid"
+          :valid-feedback="validMsg"
+          :state="stateStock"
+        >
+          <b-form-input
+            id="input-5"
+            v-model="originalProduct.stock"
+            :state="stateStock"
+            :formatter="formatterStock"
+            type="number"
+            min="-100000"
+            max="100000"
+            step="1"
+            trim
+            autocomplete="off"
+            number
+            lazy-formatter
+          />
+        </b-form-group>
+      </div>
+
+      <div class="product-detail-item">
+        <b-form-group
+          id="fieldset-100"
+          label="Produkt viditeľný"
+          label-for="input-100"
+          :invalid-feedback="stateVisibleInvalid"
+          :valid-feedback="validMsg"
+          :state="stateVisible"
+        >
+          <b-form-select
+            id="input-100"
+            v-model="originalProduct.visible"
+            :options="yesOrNo"
+            :state="true"
+          />
+        </b-form-group>
+      </div>
     </div>
     <b-form-group
-      id="fieldset-4"
+      id="fieldset-6"
+      class="item-after"
       label="Popis"
-      label-for="input-4"
+      label-for="textarea"
       :invalid-feedback="stateDescriptionInvalid"
       :valid-feedback="validMsg"
       :state="stateDescription"
@@ -128,28 +148,107 @@
         :state="stateDescription"
       />
     </b-form-group>
-    <b-table>
-      <template
-      slot="quantity" slot-scope="line">
-        <input
-          v-model="qvalue"
-          v-on:input="handleQuantityChange($event,line.item)"/>
-      </template>
-    </b-table>
-    <div
+    <b-form-group
+      id="fieldset-7"
+      label="Alergény"
+      label-for="lgroup"
+      class="item-after"
+    >
+      <b-list-group
+        id="lgroup"
+      >
+        <div
+          v-for="(allergen, index) in originalProduct.allergens"
+          :key="index"
+          class="list-item-group-wrapper"
+        >
+          <b-list-group-item
+            class="p-0"
+          >
+            <b-input
+              v-model="originalProduct.allergens[index]"
+              class="list-item"
+            />
+          </b-list-group-item>
+          <b-button
+            variant="primary"
+            @click="originalProduct.allergens.splice(index, 1)"
+          >
+            x
+          </b-button>
+        </div>
+        <b-button
+          variant="primary"
+          class="add-button"
+          @click="originalProduct.allergens.push('')"
+        >
+          Pridať
+        </b-button>
+      </b-list-group>
+    </b-form-group>
+    <b-form-group
+      id="fieldset-8"
+      label="Vitamíny"
+      label-for="vitamins"
+      class="item-after"
+    >
+      <b-list-group
+        id="vitamins"
+      >
+        <div
+          v-for="(allergen, index) in originalProduct.vitamins"
+          :key="index"
+          class="list-item-group-wrapper"
+        >
+          <b-list-group-item
+            class="p-0"
+          >
+            <b-input
+              v-model="originalProduct.vitamins[index]"
+              class="list-item"
+            />
+          </b-list-group-item>
+          <b-button
+            variant="primary"
+            @click="originalProduct.vitamins.splice(index, 1)"
+          >
+            x
+          </b-button>
+        </div>
+        <b-button
+          variant="primary"
+          class="add-button"
+          @click="originalProduct.vitamins.push('')"
+        >
+          Pridať
+        </b-button>
+      </b-list-group>
+    </b-form-group>
+    <!--     <div
       v-for="(value, key) in originalProduct"
       :key="key"
       class="product-detail-item"
     >
       {{ key }} : {{ value }}
+    </div> -->
+    <div class="buttons-wrapper">
+      <b-button
+        type="submit"
+        variant="primary"
+        :disabled="!wholeFormValid"
+        class="item-after item-after-save-button"
+      >
+        {{ id === '-1' ? 'Vytvoriť produkt' : 'Uložiť produkt' }}
+      </b-button>
+      <b-button
+        v-if="id !== '-1'"
+        variant="danger"
+        class="item-after item-after-save-button"
+        @click="deleteP()"
+      >
+        Zmazať produkt
+      </b-button>
     </div>
-    <b-button
-      type="submit"
-      variant="primary"
-      :disabled="!wholeFormValid"
-    >
-      Uložiť
-    </b-button>
   </b-form>
 </template>
 
@@ -184,11 +283,22 @@ export default {
           text: 'Pralinky - set',
         },
       ],
+      yesOrNo: [
+        {
+          value: true,
+          text: 'Áno',
+        },
+        {
+          value: false,
+          text: 'Nie',
+        },
+      ],
     };
   },
   computed: {
     ...mapGetters('products', [
       'getProductById',
+      'getNewId',
     ]),
     product() {
       return this.getProductById(Number(this.id));
@@ -240,6 +350,12 @@ export default {
     statePriceInvalid() {
       return 'Cena musí byť v rozmedzí 0.01 € až 100000 €.';
     },
+    stateVisibleInvalid() {
+      return 'Vyberte si viditeľnosť.';
+    },
+    stateVisible() {
+      return true;
+    },
     stateStock() {
       const { stock } = this.originalProduct;
       if (stock >= -100000.1 && stock <= 100000.1) {
@@ -268,6 +384,8 @@ export default {
         && this.stateUrl
         && this.stateCategory
         && this.statePrice
+        && this.stateStock
+        && this.stateDescription
       ) {
         return true;
       }
@@ -293,6 +411,8 @@ export default {
     ]),
     ...mapActions('products', [
       'setProductById',
+      'createProduct',
+      'deleteProduct',
     ]),
     formatterPrice(value) {
       const digits = 2;
@@ -319,9 +439,31 @@ export default {
         this.originalProduct = cloneDeep(this.product);
         this.pushed = true;
       }
+      else if (this.id === '-1') {
+        this.originalProduct = {
+          imageUrl: '',
+          title: '',
+          category: 'chocolate',
+          description: '',
+          price: 0,
+          stock: 1,
+          visible: true,
+          subProducts: [],
+          nutritionInfo: {
+            Energy: '',
+            Fat: '',
+            FattyAcids: '',
+            Carbohydrates: '',
+            Protein: '',
+            Salt: '',
+          },
+          vitamins: [],
+          allergens: [],
+        };
+      }
     },
     save() {
-      if (this.id >= 0 && this.originalProduct) {
+      if (Number(this.id) >= 0 && this.originalProduct) {
         const payload = {
           id: Number(this.id),
           product: this.originalProduct,
@@ -329,6 +471,13 @@ export default {
 
         this.setProductById(payload);
       }
+      else if (Number(this.id) === -1 && this.originalProduct) {
+        this.createProduct(this.originalProduct);
+      }
+    },
+    deleteP() {
+      this.deleteProduct(Number(this.id));
+      this.$router.push('/admin/products');
     },
   },
 };
@@ -341,5 +490,42 @@ export default {
   display: grid;
   grid-gap: 50px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.list-item-group-wrapper {
+  display: flex;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.list-group {
+  display: initial;
+}
+
+.list-group-item {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.list-item {
+  border: 0;
+}
+
+.add-button {
+  width: auto;
+  display: inline-block;
+}
+
+.item-after {
+  margin-top: 50px;
+}
+
+.item-after-save-button {
+  margin-bottom: 50px;
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

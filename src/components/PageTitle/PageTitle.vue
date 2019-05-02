@@ -52,6 +52,7 @@ h1, h2 {
   font-weight: normal;
   font-size: calc(40px + 2vw);
   margin-top: 0.25em;
+  margin-left: -3px;
 }
 
 .side-view.page-title {
@@ -61,7 +62,7 @@ h1, h2 {
   top: 0;
   right: 0;
   display: block;
-  padding-top: 4.875rem;
+  padding-top: 5.5625rem;
 }
 
 .side-view .page-title-title {

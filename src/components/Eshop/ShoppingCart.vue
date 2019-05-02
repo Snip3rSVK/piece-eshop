@@ -11,10 +11,10 @@
       variant="light"
       @click="hideCart()"
     >
-      Close
+      Zavrieť
     </b-button>
     <p v-show="!products.length">
-      <i>Pridajte pordukty do košíka</i>
+      <i>Pridajte produkty do košíka</i>
     </p>
     <ul>
       <li
@@ -22,11 +22,11 @@
         :key="product.id"
       >
         <!-- {{ product.title }} - {{ product.price | currency }} x {{ product.quantity }} -->
-        {{ product.title }} - {{ product.price }} € x {{ product.quantity }}
+        {{ product.title }} - {{ product.price.toFixed(2) }} € x {{ product.quantity }}
       </li>
     </ul>
     <!-- <p>Total: {{ total | currency }}</p> -->
-    <p>Spolu: {{ total }} €</p>
+    <p>Spolu: {{ total.toFixed(2) }} €</p>
     <p>
       <b-button
         :disabled="!products.length"
